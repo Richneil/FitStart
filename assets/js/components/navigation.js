@@ -1,8 +1,8 @@
 import { escapeHtml, label } from "./ui.js";
 
 const navItems=[
-  ["#/dashboard","Dashboard","⌂","dashboard"],["#/assessment/import","New Assessment","＋","assessment-import"],
-  ["#/results","Results","◎","results"],["#/compare","Compare","↔","compare"],["#/learn","Learn","◫","learn"],["#/profile","Profile","○","profile"]
+  ["#/dashboard","Home","⌂","dashboard"],["#/assessment/import","Add Assessment","＋","assessment-import"],
+  ["#/results","My Results","◎","results"],["#/compare","Compare","↔","compare"],["#/learn","Learn","◫","learn"],["#/profile","Profile","○","profile"]
 ];
 
 export function appShell(content,route,state,title="FITSTART") {

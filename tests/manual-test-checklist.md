@@ -9,7 +9,12 @@ Tested on September 1, 2026 against the local static prototype.
 - [x] Explore Demo loads Maria's fictional profile and two fictional assessments.
 - [x] Profile validation requires a display name, primary goal, and experience.
 - [x] Secondary goal cannot match the primary goal.
-- [x] Demo, manual, screenshot simulation, and QR simulation entry methods are present.
+- [x] Demo, screenshot simulation, and QR simulation entry methods are present.
+- [x] Manual value entry has been removed to reduce first-time decision load.
+- [x] Initial setup is limited to three essential decisions.
+- [x] The recommended demo path is visually prioritized over simulated capture methods.
+- [x] Dashboard and Results each present one dominant next action.
+- [x] Secondary result content uses progressive disclosure.
 - [x] Screenshot/QR simulation notice remains visible.
 - [x] Assessment review supports edit, mark unavailable, reset, category review, and mandatory confirmation.
 - [x] The five-step survey saves a draft and supports Back/Continue.

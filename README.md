@@ -18,12 +18,22 @@ No package installation or build step is required.
 
 1. Read the educational-use disclosure.
 2. Create a lightweight profile or select **Explore Demo** for Maria's fictional scenario.
-3. Choose an assessment input method.
+3. Choose the demo, screenshot-preview, or QR-preview assessment method.
 4. Review and confirm every available value.
 5. Complete the five-step contextual survey.
 6. Confirm the profile and goal.
 7. Review the transparent Personalized Starting Point.
 8. Explore priority breakdowns, the Metric Mini-Library, the two-assessment comparison, and the research comparison.
+
+## New-member experience principles
+
+- One recommended next action is emphasized on each primary screen.
+- Initial setup asks only for a name, main goal, and experience level; additional context is collected later in short steps.
+- Assessment capture offers Demo, Screenshot Preview, and QR Preview. Manual value entry has been removed.
+- The Dashboard summarizes one Main Focus before offering secondary actions.
+- Results are explained in three stages: start here, understand why, then explore next steps.
+- Technical scoring, metric connections, and the full report use progressive disclosure so they do not compete with the main explanation.
+- Plain-language reassurance explains what is saved, what is simulated, and when professional guidance matters.
 
 ## Editable content map
 

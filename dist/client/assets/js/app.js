@@ -4,13 +4,14 @@ import { validateProfile, validateAssessment } from "./validation.js";
 import { appShell } from "./components/navigation.js";
 import { escapeHtml, toast, modal } from "./components/ui.js";
 import { formValue, formValues } from "./components/forms.js";
-import { welcomeView, profileSetupView, dashboardView, assessmentImportView, assessmentReviewView, surveyView, confirmView, processingView, resultsView, metricDetailView, compareView, learnView, learnMetricView, profileView, researchView, notFoundView, blankMetrics, demoAssessments } from "./views/pages.js";
+import { surveyView, confirmView, processingView, metricDetailView, compareView, learnView, learnMetricView, profileView, researchView, notFoundView, demoAssessments } from "./views/pages.js";
+import { welcomeView, profileSetupView, dashboardView, assessmentImportView, assessmentReviewView, resultsView } from "./views/ux-pages.js";
 
 const app=document.querySelector("#app");
 let processingTimer=null;
 let corruptionShown=false;
 
-const titles={"profile-setup":"Profile Setup",dashboard:"Dashboard","assessment-import":"New Assessment","assessment-review":"Review Assessment",survey:"Context Survey",confirm:"Confirm",processing:"Preparing Results",results:"Results","result-metric":"Priority Detail",compare:"Compare",learn:"Learn","learn-metric":"Metric Guide",profile:"Profile",research:"Research Comparison","not-found":"Not Found"};
+const titles={"profile-setup":"Quick Setup",dashboard:"Home","assessment-import":"Add Assessment","assessment-review":"Check Your Values",survey:"A Few Questions",confirm:"Review",processing:"Preparing Results",results:"My Results","result-metric":"Simple Explanation",compare:"Compare",learn:"Learn", "learn-metric":"Metric Guide",profile:"Profile",research:"Research Comparison","not-found":"Not Found"};
 
 function render(){
   clearTimeout(processingTimer);
@@ -88,7 +89,6 @@ document.addEventListener("click",event=>{
   if(action==="open-boundaries")modal({title:"What FITSTART does not do",body:"<p>FITSTART is not a medical application, automated trainer, meal planner, gym-management system, or long-term fitness tracker.</p><p>It does not diagnose, predict disease risk, generate workouts or meal plans, verify professionals, or claim that a measured change proves improvement.</p>",confirmText:"I understand",cancelText:"Close"});
   if(action==="clear-data")modal({title:"Clear all demo data?",body:"<p>This removes the fictional profile, assessments, survey drafts, recent library items, and research responses saved on this device.</p>",confirmText:"Clear Demo Data",danger:true,onConfirm:()=>{store.clear();toast("Demo data cleared.");go("#/welcome")}});
   if(action==="use-demo-assessment")startAssessment("demo");
-  if(action==="use-manual-assessment")startAssessment("manual");
   if(action==="simulate-screenshot"){const file=document.querySelector("#report-upload")?.files?.[0];if(!file){toast("Choose a screenshot file to preview first.");return}toast(`${file.name} selected. Extraction is simulated; review every value.`);startAssessment("screenshot",file.name)}
   if(action==="simulate-qr"){toast("QR scan simulated. Review every captured value.");startAssessment("qr")}
   if(action==="toggle-unavailable"){const id=event.target.closest("[data-id]").dataset.id;store.update(d=>{const m=d.draftAssessment.metrics.find(x=>x.id===id);if(m.value===null){const original=demoAssessments.at(-1).metrics.find(x=>x.id===id);m.value=original?.value??""}else m.value=null;return d;});render()}
@@ -103,7 +103,7 @@ document.addEventListener("click",event=>{
 document.addEventListener("input",event=>{if(event.target.id==="metric-search")filterLibrary()});
 document.addEventListener("click",event=>{const filter=event.target.closest("[data-filter]");if(filter){document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("is-active",x===filter));filterLibrary()}const tab=event.target.closest("[data-research-tab]");if(tab){const id=tab.dataset.researchTab;document.querySelectorAll("[data-research-tab]").forEach(x=>x.setAttribute("aria-selected",String(x===tab)));document.querySelectorAll("[data-research-panel]").forEach(x=>x.classList.toggle("is-active",x.dataset.researchPanel===id));}});
 
-function startAssessment(sourceType,fileName=""){const metrics=sourceType==="manual"?structuredClone(blankMetrics):structuredClone(demoAssessments.at(-1).metrics);store.update(d=>{d.draftAssessment={id:"draft",assessedAt:new Date().toISOString().slice(0,10),sourceType,fileName,verified:false,metrics};return d;});go("#/assessment/review")}
+function startAssessment(sourceType,fileName=""){const metrics=structuredClone(demoAssessments.at(-1).metrics);store.update(d=>{d.draftAssessment={id:"draft",assessedAt:new Date().toISOString().slice(0,10),sourceType,fileName,verified:false,metrics};return d;});go("#/assessment/review")}
 function showFullAssessment(){const state=store.get();const assessment=state.assessments.at(-1);if(!assessment)return;modal({title:"Complete unprocessed assessment",body:`<p class="supporting">${escapeHtml(assessment.assessedAt)} · Original confirmed values</p><div class="table-wrap spacer-top"><table class="data-table"><tbody>${assessment.metrics.map(m=>`<tr><td>${escapeHtml(m.name)}</td><td><strong>${m.value===null?"Unavailable":`${escapeHtml(m.value)} ${escapeHtml(m.unit)}`}</strong></td><td>${escapeHtml(m.sourceCategoryLabel)}</td></tr>`).join("")}</tbody></table></div><p class="supporting spacer-top">Fictional demo report. No values were rewritten by FITSTART.</p>`,confirmText:"Done",cancelText:"Close"})}
 function filterLibrary(){const query=(document.querySelector("#metric-search")?.value||"").trim().toLowerCase();const category=document.querySelector("[data-filter].is-active")?.dataset.filter||"all";let shown=0;document.querySelectorAll("[data-library-card]").forEach(card=>{const visible=(!query||card.dataset.name.includes(query))&&(category==="all"||card.dataset.category===category);card.hidden=!visible;if(visible)shown++});const empty=document.querySelector("#library-empty");if(empty)empty.hidden=shown>0}
 function runProcessing(){let index=0;const advance=()=>{const steps=[...document.querySelectorAll("[data-process-step]")];if(!steps.length)return;steps.forEach((step,i)=>{step.classList.toggle("is-done",i<index);step.classList.toggle("is-active",i===index);if(i<index)step.querySelector(".processing-dot").textContent="✓"});if(index>=steps.length){processingTimer=setTimeout(()=>go("#/results"),200);return}index++;processingTimer=setTimeout(advance,340)};advance()}
