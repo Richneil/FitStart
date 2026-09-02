@@ -2,6 +2,23 @@
 
 FITSTART is a dependency-free, single-page educational prototype that helps a fictional newly registered gym member understand a completed FitMao-style body-composition assessment. It preserves the original measurements and adds a transparent, rule-based Personalized Starting Point.
 
+## Get the project from GitHub
+
+For the first download, open a terminal in the folder where you want to keep the project and run:
+
+```powershell
+git clone https://github.com/Richneil/FitStart.git
+cd FitStart
+```
+
+If you already downloaded the project before, open its `FitStart` folder and get the newest changes with:
+
+```powershell
+git pull origin main
+```
+
+After pulling, follow **Run locally** below to open the prototype.
+
 ## Run locally
 
 Serve this folder with any simple static web server, then open `index.html` through the server. For example:
