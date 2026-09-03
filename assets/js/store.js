@@ -15,7 +15,7 @@ export const store={
   subscribe(fn){listeners.add(fn);return()=>listeners.delete(fn)},
   update(fn,save=true){const draft=structuredClone(state);state=fn(draft)||draft;if(save)persist();listeners.forEach(fn=>fn(store.get()))},
   startSession(method="test-session"){store.update(d=>{d.session={signedIn:true,authMethod:method};return d})},
-  confirmAssessment(assessment){store.update(d=>{const confirmed={...assessment,verified:true,id:assessment.editingAssessmentId||`assessment-${Date.now()}`};delete confirmed.editingAssessmentId;delete confirmed.notice;delete confirmed.previewUrl;const index=d.assessments.findIndex(item=>item.id===confirmed.id);if(index>=0)d.assessments[index]=confirmed;else d.assessments=[...d.assessments,confirmed].slice(-2);d.draftAssessment=null;d.latestResult=null;return d})},
+  confirmAssessment(assessment){store.update(d=>{const confirmed={...assessment,verified:true,id:assessment.editingAssessmentId||`assessment-${Date.now()}`};delete confirmed.editingAssessmentId;delete confirmed.notice;delete confirmed.previewUrl;const index=d.assessments.findIndex(item=>item.id===confirmed.id);if(index>=0)d.assessments[index]=confirmed;else d.assessments=[...d.assessments,confirmed].slice(-10);d.draftAssessment=null;d.latestResult=null;return d})},
   generateResult(){store.update(d=>{const assessment=d.assessments.at(-1);const ranking=rankFocusAreas(assessment,d.profile);d.latestResult={assessmentId:assessment?.id||null,generatedAt:new Date().toISOString(),ranking};return d})},
   signOut(){store.update(d=>{d.session={signedIn:false,authMethod:null};return d})},
   clear(){state=initial();corrupt=false;storage.remove();try{localStorage.removeItem(LEGACY_KEY)}catch(error){}listeners.forEach(fn=>fn(store.get()))}

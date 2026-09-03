@@ -27,10 +27,13 @@ Reworked September 3, 2026 for first-time gym members and usability-test partici
 - [x] Report values are grouped in collapsible, plainly named sections.
 - [x] Simple metric names appear before official FitMao terms.
 - [x] Required values and the confirmation checkbox block incomplete submissions.
-- [x] A third report shows a replacement notice before the oldest is removed.
+- [x] Up to 10 reports remain available in Assessment History; the next report asks before replacing the oldest.
 
 ## Results and learning
 
+- [x] Home replaces the generic options grid with an Assessment History list.
+- [x] Every saved assessment shows its date, weight, body-fat percentage, muscle mass, and starting point.
+- [x] A saved assessment can reopen its own interpreted results without changing the report values.
 - [x] The starting point appears before supporting notices and secondary information.
 - [x] Results explain why a focus appears and provide one obvious next action.
 - [x] Focus details use plain headings and preserve supporting report values.

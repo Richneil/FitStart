@@ -38,8 +38,9 @@ Then open `http://127.0.0.1:4173/#/welcome` in a browser.
 4. Check the report values in six collapsible sections.
 5. Confirm the member details used to organize the results.
 6. View the recommended starting point and why it appears first.
-7. Open a detailed explanation, a trainer discussion guide, all report values, or the term guide.
-8. Add a second report to compare measured changes.
+7. Reopen any saved assessment from the Assessment History on Home.
+8. Open a detailed explanation, a trainer discussion guide, all report values, or the term guide.
+9. Add a second report to compare measured changes.
 
 There is no named member demo and no fake sign-in. Every tester begins with a clean local profile. Old prototype data is removed automatically after this version is opened.
 
@@ -50,7 +51,8 @@ There is no named member demo and no fake sign-in. Every tester begins with a cl
 | `#/welcome` | Simple introduction and three-step overview |
 | `#/sign-in` | Before-you-begin checklist for a local test session |
 | `#/profile/setup` | Four short profile questions |
-| `#/dashboard` | Home page and clearest next action |
+| `#/dashboard` | Home page, newest starting point, and assessment history |
+| `#/history/:assessmentId` | Interpreted results for a saved assessment |
 | `#/assessment/add` | Choose how to add a report |
 | `#/assessment/manual` | Type report values |
 | `#/assessment/review` | Check imported or typed values |
@@ -80,7 +82,7 @@ There is no named member demo and no fake sign-in. Every tester begins with a cl
 - QR and screenshot reading are not connected yet. Those options load clearly disclosed sample values so the report-review interface can be tested.
 - Testers must check and confirm the values before results are created.
 - Uploaded image bytes are not saved in browser storage.
-- Only the two newest confirmed reports are kept.
+- Up to 10 confirmed reports are kept in Assessment History; comparison uses the two newest.
 - Profile and report data remain in the current browser until the tester clears them.
 - Researcher controls are hidden inside a collapsed section in My Profile.
 

@@ -1,7 +1,7 @@
 const routes=[
   ["welcome",/^#\/welcome$/],["auth",/^#\/sign-in$/],["profile-setup",/^#\/profile\/setup$/],["dashboard",/^#\/dashboard$/],
   ["assessment-add",/^#\/assessment\/add$/],["assessment-manual",/^#\/assessment\/manual$/],["assessment-review",/^#\/assessment\/review$/],
-  ["context-confirm",/^#\/context\/confirm$/],["processing",/^#\/processing$/],["results",/^#\/results$/],
+  ["context-confirm",/^#\/context\/confirm$/],["processing",/^#\/processing$/],["results",/^#\/results$/],["history",/^#\/history\/([^/]+)$/],
   ["focus-detail",/^#\/results\/focus\/([^/]+)$/],["summary",/^#\/summary$/],["report",/^#\/report$/],["compare",/^#\/compare$/],
   ["glossary",/^#\/glossary$/],["glossary-detail",/^#\/glossary\/([^/]+)$/],["profile",/^#\/profile$/],["research",/^#\/research-comparison$/]
 ];

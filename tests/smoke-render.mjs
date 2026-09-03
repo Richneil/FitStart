@@ -16,9 +16,9 @@ const full={version:3,session:{signedIn:true,authMethod:"test-session"},profile,
 const empty={...full,assessments:[],draftAssessment:null,latestResult:null,ui:{...full.ui,researchMode:false}};
 
 const pages=[
-  views.welcomeView(),views.authView(),views.onboardingView(empty),views.dashboardView(empty),views.assessmentAddView(),
+  views.welcomeView(),views.authView(),views.onboardingView(empty),views.dashboardView(empty),views.dashboardView(full),views.assessmentAddView(),
   views.manualEntryView({...empty,draftAssessment:null}),views.assessmentReviewView(full),views.contextView(full),views.processingView(),
-  views.resultsView(full),views.focusDetailView(full,"bodyFat"),views.summaryView(full),views.fullReportView(full),
+  views.resultsView(full),views.historyResultView(full,assessments[0].id),views.focusDetailView(full,"bodyFat"),views.summaryView(full),views.fullReportView(full),
   views.glossaryView(),views.glossaryDetailView(full,"pbf"),views.compareView(full),views.profileView(full),
   views.researchView(full),views.notFoundView()
 ];
@@ -32,4 +32,6 @@ if(ranking.mainFocus?.id!=="bodyFat")throw new Error(`Expected body fat as the s
 if(ranking.mainFocus.supporting.filter(item=>["Under","Over"].includes(item.status)).length<2)throw new Error("Body-fat supporting evidence is incomplete.");
 if(!views.assessmentAddView().includes("Type the values yourself"))throw new Error("Manual report entry option is missing.");
 if(!views.compareView(empty).includes("second FitMao assessment"))throw new Error("Locked comparison state is missing.");
+if(!views.dashboardView(full).includes("Assessment history")||!views.dashboardView(full).includes("View interpreted results"))throw new Error("Assessment history is missing from Home.");
+if(!views.historyResultView(full,assessments[0].id).includes("Earlier saved assessment"))throw new Error("Saved assessment results cannot be reopened.");
 console.log(`${pages.length} screens rendered; test-user wording and deterministic ranking passed.`);
