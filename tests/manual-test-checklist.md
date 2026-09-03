@@ -1,82 +1,52 @@
-# FITSTART Manual Test Checklist
+# FITSTART Test Checklist
 
-Tested on September 1, 2026 against the local static prototype.
+Updated September 3, 2026 for the test-user frontend.
 
 ## Core journey
 
-- [x] Welcome explains the educational purpose before collecting information.
-- [x] Create My Starting Point opens Profile Setup.
-- [x] Explore Demo loads Maria's fictional profile and two fictional assessments.
-- [x] Profile validation requires a display name, primary goal, and experience.
-- [x] Secondary goal cannot match the primary goal.
-- [x] Demo, screenshot simulation, and QR simulation entry methods are present.
-- [x] Manual value entry has been removed to reduce first-time decision load.
-- [x] Initial setup is limited to three essential decisions.
-- [x] The recommended demo path is visually prioritized over simulated capture methods.
-- [x] Dashboard and Results each present one dominant next action.
-- [x] Secondary result content uses progressive disclosure.
-- [x] Screenshot/QR simulation notice remains visible.
-- [x] Assessment review supports edit, mark unavailable, reset, category review, and mandatory confirmation.
-- [x] The five-step survey saves a draft and supports Back/Continue.
-- [x] Confirm screen shows assessment, goal, experience, activities, availability, and barriers.
-- [x] Changed main goal displays the Goal Update Notice before recalculation.
-- [x] Processing uses transparent non-AI wording and reaches Results.
-- [x] Complete UI journey was exercised from assessment entry through Results with no console errors.
+- [x] Welcome has one primary **Get started** action.
+- [x] Maria, demo shortcuts, and sample-person result previews are removed.
+- [x] Profile setup asks only for a name, main goal, and assessment experience.
+- [x] Assessment capture offers screenshot upload and QR preview only.
+- [x] Test-version limitations are explained before users continue.
+- [x] Assessment review allows every prefilled value and report label to be corrected.
+- [x] Mandatory confirmation is required before results are created.
+- [x] The repeated five-step survey and confirmation screen are removed from the main journey.
+- [x] The confirmed assessment now leads directly to result preparation.
+- [x] Home highlights one first result before secondary actions.
+- [x] Results explain what came first, why, and what to understand next.
+- [x] The **Write down one question** task and Quick Wins section are removed.
 
-## Results and rule behavior
+## Language and navigation
 
-- [x] The same demo inputs deterministically select Body-Fat Percentage as Main Focus.
-- [x] Main Focus and Top Priorities preserve original value, unit, and demo category.
-- [x] Every priority shows traceable “You told us” and “Your assessment showed” evidence.
-- [x] Priority score, explanation depth, and Quick Win selection are separate services.
-- [x] Technical breakdown shows each demo point contribution and validation warning.
-- [x] Missing values are excluded rather than silently scored as zero.
-- [x] Insufficient data has an honest recovery state.
-- [x] Professional-guidance reminder is visible without opening an accordion.
-- [x] Full unprocessed assessment is available from Results.
-- [x] No screen generates a workout, calorie target, meal plan, diagnosis, or disease-risk prediction.
+- [x] Main navigation is limited to Home, Add Assessment, My Results, Glossary, and Profile.
+- [x] My Results is unavailable until a result exists.
+- [x] Technical metric names use readable labels such as **Body fat estimate**, **Muscle mass**, and **Resting energy estimate**.
+- [x] The glossary keeps familiar abbreviations while using everyday definitions.
+- [x] Report labels use **Within expected range**, **Worth reviewing**, and **Review first**.
+- [x] Scoring details are translated into report label, goal connection, and result position.
+- [x] Professional-guidance language remains visible.
 
-## Comparison and learning
+## State and safety
 
-- [x] Compare is locked with an explanation until two assessments exist.
-- [x] Comparison uses only latest and immediately previous assessments.
-- [x] Differences use increased, decreased, or no measured change.
-- [x] Goal-direction language appears only for configured approved rules.
-- [x] Large differences trigger verification language.
-- [x] No chart, streak, forecast, third assessment, or success/failure claim is shown.
-- [x] Metric Library supports search, category filters, recent items, detail pages, limitations, related metrics, and source placeholders.
-- [x] Research comparison uses identical fictional values and neutral condition labels.
-- [x] Research view records first-view condition, time start, and comprehension responses locally.
+- [x] Version 2 starts previous demo users with a clean test session.
+- [x] The browser storage key is `fitstartPrototypeV2`.
+- [x] Legacy `fitstartPrototypeV1` data is removed safely.
+- [x] Clear saved data removes the profile and assessment state after confirmation.
+- [x] Only the two newest confirmed assessments are kept.
+- [x] Missing values are excluded instead of counted as zero.
+- [x] No workout, meal plan, diagnosis, or disease-risk prediction is generated.
 
-## State and edge cases
+## Automated checks
 
-- [x] One versioned local-storage key is used: `fitstartPrototypeV1`.
-- [x] Only two assessments are retained.
-- [x] Clear Demo Data uses confirmation and removes prototype state.
-- [x] Storage-unavailable state explains that the session can continue without persistence.
-- [x] Corrupt/incompatible state opens a safe reset path.
-- [x] Invalid route provides a Dashboard recovery link.
-- [x] Runtime fallback prevents an intentionally blank screen.
+- [x] All JavaScript modules pass syntax validation.
+- [x] Eleven primary page states render successfully in `tests/smoke-render.mjs`.
+- [x] Rendered primary pages contain no Maria copy, demo entry point, or removed question task.
+- [x] The deployment structure includes its client files and Worker entry point.
 
-## Accessibility and responsive review
+## Pending professional decisions
 
-- [x] Every reviewed route has one H1, no duplicate IDs, and no unlabeled interactive control.
-- [x] Semantic landmarks, form labels, aria-live regions, aria-expanded behavior, and visible focus styles are present.
-- [x] Meaning is communicated with text and shape/icon, not color alone.
-- [x] Reduced-motion preference is respected.
-- [x] Touch controls are at least 44 px where applicable.
-- [x] All 14 required routes were checked at 360, 768, 1024, and 1440 px with no horizontal page overflow.
-- [x] Forty-five screenshots were captured: 15 views at desktop, tablet, and mobile sizes.
-
-## Screenshots
-
-Naming format: `{desktop-1440|tablet-768|mobile-360}-{screen}.png`.
-
-Screens include Welcome, Profile Setup, Dashboard, Assessment Input, Assessment Review, Survey, Confirm, Processing, Results, Priority Detail, Compare, Library, Library Detail, Profile, and Research Comparison.
-
-## Pending thesis-team decisions
-
-- [ ] Confirm exact real FitMao metrics and source categories.
-- [ ] Professionally review scoring weights, tie rules, goal mappings, relationship map, and difference thresholds.
-- [ ] Approve metric definitions and sources.
-- [ ] Confirm final survey choices, brand system, privacy model, and research tasks.
+- [ ] Confirm the final FitMao metrics, report labels, and transfer format.
+- [ ] Professionally review priority rules, goal mappings, relationships, and thresholds.
+- [ ] Approve measurement definitions and sources.
+- [ ] Confirm final privacy, consent, and test-research protocol.

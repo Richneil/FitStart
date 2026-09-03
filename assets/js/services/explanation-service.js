@@ -8,8 +8,8 @@ export function explainMetric(item, profile) {
   return {
     meaning: depth || "This measurement provides body-composition context.",
     toldUs: `Your main goal is ${goal}${profile.activities?.length ? ` and you prefer ${profile.activities.map(id=>optionLabels[id]).join(" and ").toLowerCase()}` : ""}.`,
-    showed: `Your confirmed report listed ${item.name} as ${item.value} ${item.unit}, classified as “${item.sourceCategoryLabel}.”`,
-    why: item.primaryMatch ? `This result may deserve attention because its demo classification and your ${goal.toLowerCase()} goal both contribute to its priority.` : `This result may deserve attention based on its demo classification and an approved supporting relationship.`,
+    showed: `Your report showed ${item.name} as ${item.value} ${item.unit} and labelled it “${item.sourceCategoryLabel}.”`,
+    why: item.primaryMatch ? `This result comes first because the report says it is worth reviewing and it connects with your ${goal.toLowerCase()} goal.` : `This result comes first because of its report label and how it connects with the other measurements.`,
     limitation: definition?.limitation || "Interpret this result with a qualified fitness professional."
   };
 }

@@ -1,23 +1,23 @@
-import { demoProfile } from "./data/demo-profile.js";
-import { demoAssessments } from "./data/demo-assessments.js";
 import { scoreAssessment } from "./services/priority-service.js";
 
-const KEY = "fitstartPrototypeV1";
+const KEY = "fitstartPrototypeV2";
+const LEGACY_KEY = "fitstartPrototypeV1";
 const listeners = new Set();
 let storageAvailable = true;
 let storageCorrupt = false;
 
 const initial = () => ({
-  version:1, profile:null, assessments:[], draftAssessment:null, draftSurvey:null, latestResult:null,
+  version:2, profile:null, assessments:[], draftAssessment:null, draftSurvey:null, latestResult:null,
   ui:{onboardingComplete:false,lastRoute:"#/welcome",dismissedNotices:[],recentMetrics:[],research:{viewedFirst:null,startedAt:null,answers:{}}}
 });
 
 function read() {
   try {
+    localStorage.removeItem(LEGACY_KEY);
     const raw = localStorage.getItem(KEY);
     if (!raw) return initial();
     const parsed = JSON.parse(raw);
-    if (parsed.version !== 1 || !parsed.ui) throw new Error("Incompatible data");
+    if (parsed.version !== 2 || !parsed.ui) throw new Error("Incompatible data");
     return parsed;
   } catch (error) {
     storageCorrupt = true;
@@ -42,12 +42,6 @@ export const store = {
     if (persistChange) persist();
     listeners.forEach(fn => fn(store.get()));
   },
-  loadDemo(twoAssessments=false) {
-    const assessments = structuredClone(twoAssessments ? demoAssessments : [demoAssessments[1]]);
-    const result = scoreAssessment(assessments.at(-1), demoProfile);
-    state = {...initial(),profile:structuredClone(demoProfile),assessments,latestResult:{assessmentId:assessments.at(-1).id,generatedAt:new Date().toISOString(),mainFocusMetricId:result.mainFocus?.id,priorityMetricIds:[result.mainFocus,...result.priorities].filter(Boolean).map(x=>x.id),explanations:{}},ui:{...initial().ui,onboardingComplete:true,lastRoute:"#/dashboard"}};
-    persist(); listeners.forEach(fn => fn(store.get()));
-  },
   confirmAssessment(assessment) {
     store.update(draft => {
       const confirmed = {...assessment,verified:true,id:`assessment-${Date.now()}`};
@@ -64,5 +58,5 @@ export const store = {
       return draft;
     });
   },
-  clear() { state=initial(); storageCorrupt=false; try{localStorage.removeItem(KEY)}catch(error){storageAvailable=false} listeners.forEach(fn=>fn(store.get())); }
+  clear() { state=initial(); storageCorrupt=false; try{localStorage.removeItem(KEY);localStorage.removeItem(LEGACY_KEY)}catch(error){storageAvailable=false} listeners.forEach(fn=>fn(store.get())); }
 };

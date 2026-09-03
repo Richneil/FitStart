@@ -1,6 +1,6 @@
 export const demoProfile = {
-  id: "demo-maria",
-  displayName: "Maria",
+  id: "sample-member",
+  displayName: "Test Member",
   primaryGoal: "fat-loss",
   secondaryGoal: "general-fitness",
   experience: "new",
@@ -14,8 +14,8 @@ export const demoProfile = {
 export const optionLabels = {
   "fat-loss": "Fat Loss", "muscle-development": "Muscle Development",
   "general-fitness": "General Fitness", strength: "Strength", endurance: "Endurance",
-  "learn-composition": "Learn About My Body Composition", new: "New",
-  "some-experience": "Some Experience", experienced: "Experienced",
+  "learn-composition": "Understand My Body Composition", new: "This is my first time",
+  "some-experience": "I know a little", experienced: "I understand these reports",
   walking: "Walking", "group-classes": "Group classes", cycling: "Cycling",
   running: "Running", "resistance-training": "Resistance training", swimming: "Swimming",
   "1-day-week": "One day per week", "2-days-week": "Two days per week",
@@ -24,9 +24,9 @@ export const optionLabels = {
   "create-routine": "Create a realistic routine", time: "Limited time", confidence: "Low confidence",
   consistency: "Consistency", access: "Access to equipment", uncertainty: "Uncertainty about where to start",
   other: "Other", low: "Not very confident", medium: "Somewhat confident", high: "Very confident"
-  ,"body-fat-percentage": "Body-Fat Percentage", "skeletal-muscle-mass": "Skeletal Muscle Mass",
-  "body-water": "Body Water", "visceral-fat": "Visceral Fat", weight: "Weight",
-  bmi: "Body Mass Index", "basal-metabolic-rate": "Basal Metabolic Rate"
+  ,"body-fat-percentage": "Body fat estimate", "skeletal-muscle-mass": "Muscle mass",
+  "body-water": "Body water estimate", "visceral-fat": "Visceral fat level", weight: "Body weight",
+  bmi: "Body mass index (BMI)", "basal-metabolic-rate": "Resting energy estimate"
 };
 
 export const goals = ["fat-loss", "muscle-development", "general-fitness", "strength", "endurance", "learn-composition"];
