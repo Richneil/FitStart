@@ -1,0 +1,45 @@
+/* Beginner-friendly refinements loaded after the core responsive styles. */
+.hero h1{font-size:clamp(2.65rem,5vw,4.6rem)}
+.start-card .lead{margin-bottom:22px;color:var(--color-muted)}
+.start-checklist{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:12px}
+.start-checklist li{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;padding:14px;border-radius:12px;background:var(--color-primary-100)}
+.start-checklist li>span{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#fff;color:var(--color-primary-800);font-weight:900}
+.start-checklist li>div{display:grid;gap:2px}
+.start-checklist small{color:var(--color-muted)}
+.required-key{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 4px}
+.required-key span{padding:8px 12px;border-radius:999px;background:var(--color-primary-100);color:var(--color-primary-800);font-size:.84rem;font-weight:750}
+.review-section{overflow:hidden;border:1px solid var(--color-border);border-radius:14px;background:#fff}
+.review-section summary{min-height:64px;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:14px 18px;cursor:pointer;color:var(--color-primary-800)}
+.review-section summary>span:first-child{display:grid}
+.review-section summary small{color:var(--color-muted)}
+.review-section summary>span:last-child{white-space:nowrap;color:var(--color-muted);font-size:.82rem}
+.review-section[open] summary{border-bottom:1px solid var(--color-border);background:var(--color-primary-100)}
+.review-section>div{display:grid;gap:10px;padding:14px}
+.report-section summary>span:first-child{display:grid}
+.researcher-tools summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:800;color:var(--color-primary-800)}
+.researcher-tools[open] summary{margin-bottom:12px}
+.mobile-nav svg{width:20px;height:20px}
+.brand,.back-link{min-height:44px;display:inline-flex;align-items:center}
+
+@media(max-width:1023px){
+  .journey-status ol{justify-content:center}
+}
+
+@media(max-width:767px){
+  .hero h1{font-size:clamp(2.35rem,11vw,3.1rem)}
+  .hero-copy .lead{font-size:1rem}
+  .journey-status{padding:8px 14px}
+  .journey-status ol{justify-content:space-between;gap:8px}
+  .journey-status li{font-size:.72rem}
+  .results-page .page-header{margin-bottom:16px}
+  .results-page .page-header h1{font-size:1.8rem}
+  .review-section summary{padding:13px 14px}
+  .review-section>div{padding:10px}
+  .report-preview img{max-height:340px}
+}
+
+@media(max-width:390px){
+  .journey-status li{font-size:0}
+  .journey-status li::before{margin-right:0}
+  .review-section summary>span:last-child{font-size:.74rem}
+}

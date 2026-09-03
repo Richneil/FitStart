@@ -1,12 +1,12 @@
 # FITSTART Frontend Prototype
 
-FITSTART is a complete, dependency-free frontend prototype for KSYN Fitness Alabang. It helps a new gym member review a FitMao body-composition report, connect confirmed report information with a stated fitness goal, and understand which focus area to discuss first with a qualified fitness professional.
+FITSTART is a browser-based guide for new KSYN Fitness Alabang members. It helps a member review a FitMao body-composition report, understand unfamiliar terms, and see which part of the report is most relevant to their stated goal.
 
-FITSTART organizes and explains information. It does not diagnose, predict health risk, prescribe workouts or diets, or replace the original FitMao report.
+FITSTART organizes and explains report information. It does not diagnose health conditions, predict risk, prescribe workouts or diets, or replace advice from a qualified fitness professional.
 
-## Get the newest version from GitHub
+## Get the project from GitHub
 
-First download:
+For the first download:
 
 ```powershell
 git clone https://github.com/Richneil/FitStart.git
@@ -20,98 +20,80 @@ cd FitStart
 git pull origin main
 ```
 
-## Run locally
+## Run it on your computer
 
-No package installation or build step is needed. From the project folder, run:
+No package installation or build step is needed. In the project folder, run:
 
 ```powershell
 python -m http.server 4173
 ```
 
-Open `http://127.0.0.1:4173/#/welcome` in a browser.
+Then open `http://127.0.0.1:4173/#/welcome` in a browser.
 
-## Main member journey
+## What a test user does
 
-1. Create a simulated account or explicitly open the fictional sample workspace.
-2. Complete the four short profile questions.
-3. Add a FitMao report by simulated QR, screenshot, or manual entry.
-4. Review every captured value, unit, printed range, and original report position.
-5. Confirm the member's goal and assessment familiarity.
-6. View a deterministic Personalized Starting Point.
-7. Open a focus explanation, trainer discussion summary, complete source report, or glossary.
-8. Add a second report to unlock the limited comparison.
+1. Read the short introduction and start a local test session.
+2. Enter a name or nickname, choose a goal, and select an explanation level.
+3. Add a FitMao report by screenshot, QR test, or typed values.
+4. Check the report values in six collapsible sections.
+5. Confirm the member details used to organize the results.
+6. View the recommended starting point and why it appears first.
+7. Open a detailed explanation, a trainer discussion guide, all report values, or the term guide.
+8. Add a second report to compare measured changes.
 
-The Maria Santos data appears only after choosing **Explore Demo** and is always marked as a sample workspace. The ordinary flow starts with an empty test-user profile.
+There is no named member demo and no fake sign-in. Every tester begins with a clean local profile. Old prototype data is removed automatically after this version is opened.
 
-## Routes
+## Main pages
 
-| Route | Purpose |
+| Route | What it shows |
 |---|---|
-| `#/welcome` | Product introduction |
-| `#/sign-in` | Simulated account access |
-| `#/profile/setup` | Four-step member onboarding |
-| `#/dashboard` | Member home and next action |
-| `#/assessment/add` | Choose report-entry method |
-| `#/assessment/manual` | Enter report sections manually |
-| `#/assessment/review` | Verify captured source values |
-| `#/context/confirm` | Confirm personal context |
-| `#/processing` | Explain the ranking sequence |
-| `#/results` | Personalized Starting Point |
-| `#/results/focus/:focusId` | Full focus-area explanation |
-| `#/summary` | Trainer Discussion Summary |
-| `#/report` | Structured complete FitMao report |
-| `#/compare` | Two-assessment comparison |
-| `#/glossary` | Searchable metric glossary |
-| `#/glossary/:metricId` | Metric definition and limitation |
-| `#/profile` | Profile, Research Mode, and local-data controls |
-| `#/research-comparison` | Neutral source-versus-FITSTART view |
+| `#/welcome` | Simple introduction and three-step overview |
+| `#/sign-in` | Before-you-begin checklist for a local test session |
+| `#/profile/setup` | Four short profile questions |
+| `#/dashboard` | Home page and clearest next action |
+| `#/assessment/add` | Choose how to add a report |
+| `#/assessment/manual` | Type report values |
+| `#/assessment/review` | Check imported or typed values |
+| `#/context/confirm` | Confirm goal and explanation preference |
+| `#/results` | Starting point and next results to review |
+| `#/results/focus/:focusId` | Detailed explanation for one result area |
+| `#/summary` | Printable guide for talking with a trainer |
+| `#/report` | Every confirmed report value |
+| `#/compare` | Compare the two newest reports |
+| `#/glossary` | Search and learn FitMao terms |
+| `#/profile` | Profile, test data, and researcher controls |
 
-## Architecture
+## How the frontend is organized
 
-- `index.html` contains the app mount, metadata, and stylesheet/module links.
-- `assets/js/router.js` provides hash routing.
-- `assets/js/store.js` owns the single `fitstartPrototypeV2` browser state.
-- `assets/js/data/` contains editable report data, focus groupings, goal mappings, metric definitions, and glossary copy.
-- `assets/js/services/` contains deterministic ranking, explanation, comparison, and local-storage behavior.
-- `assets/js/components/` contains reusable navigation, focus, metric, modal, and notification components.
-- `assets/js/views/` contains the screen renderers and route-specific exports.
-- `assets/css/` separates reset, tokens, base rules, layout, components, pages, and responsive behavior.
-- `tests/` contains automated screen-render checks and the manual acceptance checklist.
+- `index.html` starts the app and loads all styles and scripts.
+- `assets/js/router.js` connects each URL to the correct screen.
+- `assets/js/store.js` keeps one `fitstartTestUserV3` browser session.
+- `assets/js/data/` contains goal choices, FitMao measurements, focus rules, and term explanations.
+- `assets/js/services/` organizes results, explanations, comparisons, and browser storage.
+- `assets/js/components/` contains reusable navigation, result cards, measurement rows, dialogs, and notices.
+- `assets/js/views/` contains the complete pages.
+- `assets/css/` contains colors, spacing, layout, components, pages, and mobile refinements.
+- `tests/` contains the automated screen check and manual usability checklist.
 
-## Where to edit
+## Important testing behavior
 
-- Fictional member and option labels: `assets/js/data/demo-data.js`
-- Sanitized FitMao values and metric definitions: `assets/js/data/fitmao-metrics.js`
-- Focus-area groupings, goal relevance, tie order, and thresholds: `assets/js/data/ranking-rules.js`
-- Glossary content and source placeholders: `assets/js/data/glossary-data.js`
-- Ranking calculation: `assets/js/services/ranking-service.js`
-- Member-facing explanations: `assets/js/services/explanation-service.js`
-- Comparison wording and measured differences: `assets/js/services/comparison-service.js`
-- Colors, radii, and shadows: `assets/css/tokens.css`
+- QR and screenshot reading are not connected yet. Those options load clearly disclosed sample values so the report-review interface can be tested.
+- Testers must check and confirm the values before results are created.
+- Uploaded image bytes are not saved in browser storage.
+- Only the two newest confirmed reports are kept.
+- Profile and report data remain in the current browser until the tester clears them.
+- Researcher controls are hidden inside a collapsed section in My Profile.
 
-## Simulated integrations
+## Before production
 
-- Google and email authentication
-- FitMao QR import
-- Screenshot text extraction
-- Backend/cloud storage
+The FitMao measurement definitions, ranges, focus rules, glossary sources, privacy behavior, consent flow, and real import services still require professional and technical approval. Moderated usability testing with new gym members is also required.
 
-Screenshot image bytes are not stored in `localStorage`. The prototype keeps at most the two newest confirmed assessments. A clear warning appears before a third report replaces the oldest.
+## Check the build
 
-## Prototype limitations
-
-- Ranking rules are demonstration rules pending fitness-professional validation.
-- Metric definitions include research-source placeholders that must be approved before production.
-- Account, QR, screenshot, and backend features are not connected to real services.
-- All saved state is browser-local and intended only for prototype testing.
-- The comparison reports measured differences; it does not claim success, failure, or proven improvement.
-
-## Verify the build
-
-Run the automated render and ranking check:
+Run the automated screen and result check:
 
 ```powershell
 node tests/smoke-render.mjs
 ```
 
-Then follow `tests/manual-test-checklist.md` for the full route, responsive, accessibility, and content review.
+Then follow `tests/manual-test-checklist.md` for the full route, mobile, accessibility, and wording review.

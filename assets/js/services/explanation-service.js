@@ -1,4 +1,4 @@
-import { labels } from "../data/demo-data.js";
+import { labels } from "../data/member-options.js";
 
 const displayValue = metric => `${metric.value}${metric.unit && metric.unit !== "—" ? ` ${metric.unit}` : ""}`;
 const evidenceText = focus => focus.supporting.filter(metric => ["Under","Over"].includes(metric.status)).slice(0,2).map(metric => `${metric.name} is ${displayValue(metric)} (${metric.status}${metric.range && metric.range !== "Chart band" ? `; printed reference ${metric.range}` : " band"})`);
@@ -14,7 +14,7 @@ export function explainFocus(focus, profile) {
     definition:isNew ? focus.definition : `${focus.definition} Supporting measurements stay grouped so related results are not counted as separate priorities.`,
     toldUs:`You selected ${primary} as your primary goal${secondary ? ` and ${secondary} as your secondary goal` : ""}.`,
     showed:`Your FitMao report shows ${strongest}.`,
-    why:`FITSTART ranked ${focus.label} here because the confirmed report evidence${focus.primary ? ` directly relates to your ${primary} goal` : " was relevant under the demonstration rules"}.`,
+    why:`FITSTART placed ${focus.label} here because the confirmed report information${focus.primary ? ` directly relates to your ${primary} goal` : " is relevant to understanding your overall results"}.`,
     recommendation:`We recommend reviewing ${focus.label} first because it is supported by your confirmed FitMao results and your stated goal. Discuss appropriate exercise and nutrition strategies with a qualified fitness professional.`
   };
 }

@@ -1,12 +1,18 @@
-import { demoProfile } from "../assets/js/data/demo-data.js";
-import { demoAssessments } from "../assets/js/data/fitmao-metrics.js";
+import { sampleAssessments } from "../assets/js/data/fitmao-metrics.js";
 import { rankFocusAreas } from "../assets/js/services/ranking-service.js";
 import * as views from "../assets/js/views/all-views.js";
 
-const profile=structuredClone(demoProfile);
-const assessments=structuredClone(demoAssessments);
+const profile={
+  id:"local-member",
+  displayName:"Alex",
+  primaryGoal:"fat-loss",
+  secondaryGoal:"understand-results",
+  fitnessExperience:"new",
+  assessmentFamiliarity:"not-familiar"
+};
+const assessments=structuredClone(sampleAssessments);
 const ranking=rankFocusAreas(assessments.at(-1),profile);
-const full={version:2,session:{signedIn:true},profile,assessments,draftAssessment:{...assessments.at(-1),verified:false},latestResult:{assessmentId:assessments.at(-1).id,ranking},ui:{onboardingStep:1,researchMode:true,isDemo:false}};
+const full={version:3,session:{signedIn:true,authMethod:"test-session"},profile,assessments,draftAssessment:{...assessments.at(-1),verified:false},latestResult:{assessmentId:assessments.at(-1).id,ranking},ui:{onboardingStep:1,onboardingComplete:true,researchMode:true}};
 const empty={...full,assessments:[],draftAssessment:null,latestResult:null,ui:{...full.ui,researchMode:false}};
 
 const pages=[
@@ -19,11 +25,11 @@ const pages=[
 
 for(const [index,html] of pages.entries()){
   if(!/<h1\b/i.test(html))throw new Error(`Screen ${index+1} has no H1.`);
-  if(/Write down one question|Quick Wins|First Steps|AI is thinking/i.test(html))throw new Error(`Screen ${index+1} contains excluded copy.`);
+  if(/Explore Demo|Sample workspace|Continue with Google|Email address|Password|Write down one question|Quick Wins|First Steps|AI is thinking/i.test(html))throw new Error(`Screen ${index+1} contains confusing or excluded copy.`);
   if(/TODO|href="#"(?:\s|>)/i.test(html))throw new Error(`Screen ${index+1} contains unfinished or dead UI.`);
 }
-if(ranking.mainFocus?.id!=="bodyFat")throw new Error(`Expected Body Fat Main Focus, received ${ranking.mainFocus?.id}.`);
-if(ranking.mainFocus.supporting.filter(item=>["Under","Over"].includes(item.status)).length<2)throw new Error("Body Fat supporting evidence is incomplete.");
-if(!views.assessmentAddView().includes("Enter Values Manually"))throw new Error("Manual entry option is missing.");
+if(ranking.mainFocus?.id!=="bodyFat")throw new Error(`Expected body fat as the starting point, received ${ranking.mainFocus?.id}.`);
+if(ranking.mainFocus.supporting.filter(item=>["Under","Over"].includes(item.status)).length<2)throw new Error("Body-fat supporting evidence is incomplete.");
+if(!views.assessmentAddView().includes("Type the values yourself"))throw new Error("Manual report entry option is missing.");
 if(!views.compareView(empty).includes("second FitMao assessment"))throw new Error("Locked comparison state is missing.");
-console.log(`${pages.length} screens rendered; deterministic focus ranking passed.`);
+console.log(`${pages.length} screens rendered; test-user wording and deterministic ranking passed.`);
