@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1040" viewBox="0 0 720 1040" role="img" aria-labelledby="title desc">
+  <title id="title">Fictional FitMao demonstration report</title>
+  <desc id="desc">A sanitized report-style preview containing the same fictional values used in the FITSTART prototype.</desc>
+  <rect width="720" height="1040" fill="#fff"/><rect x="28" y="28" width="664" height="984" rx="8" fill="none" stroke="#174c4f" stroke-width="2"/>
+  <text x="54" y="82" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#123f43">FitMao Body Composition Report</text>
+  <text x="54" y="112" font-family="Arial,sans-serif" font-size="15" fill="#5d696b">FICTIONAL DEMONSTRATION DATA · Assessment 2026-09-01</text>
+  <g font-family="Arial,sans-serif">
+    <rect x="54" y="144" width="612" height="52" rx="6" fill="#ddeeef"/><text x="72" y="177" font-size="20" font-weight="700" fill="#123f43">Body Composition Analysis</text>
+    <g font-size="16" fill="#182022"><text x="72" y="230">Body Water</text><text x="375" y="230">38.8 L</text><text x="520" y="230" fill="#a76518">Under</text><text x="72" y="264">Protein</text><text x="375" y="264">10.5 kg</text><text x="520" y="264">Normal</text><text x="72" y="298">Minerals</text><text x="375" y="298">3.7 kg</text><text x="520" y="298">Normal</text><text x="72" y="332">Body Fat Mass</text><text x="375" y="332">16.5 kg</text><text x="520" y="332" fill="#a76518">Over</text></g>
+    <rect x="54" y="364" width="612" height="52" rx="6" fill="#ddeeef"/><text x="72" y="397" font-size="20" font-weight="700" fill="#123f43">Muscle-Fat &amp; Obesity Analysis</text>
+    <g font-size="16" fill="#182022"><text x="72" y="450">Weight</text><text x="375" y="450">69.6 kg</text><text x="520" y="450" fill="#a76518">Over</text><text x="72" y="484">Skeletal Muscle Mass</text><text x="375" y="484">29.7 kg</text><text x="520" y="484">Normal</text><text x="72" y="518">BMI</text><text x="375" y="518">25.5 kg/m²</text><text x="520" y="518" fill="#a76518">Over</text><text x="72" y="552">Percent Body Fat</text><text x="375" y="552">23.7%</text><text x="520" y="552" fill="#a76518">Over</text></g>
+    <rect x="54" y="584" width="612" height="52" rx="6" fill="#ddeeef"/><text x="72" y="617" font-size="20" font-weight="700" fill="#123f43">Comprehensive Evaluation</text>
+    <g font-size="16" fill="#182022"><text x="72" y="670">Basal Metabolic Rate</text><text x="375" y="670">1516 kcal</text><text x="72" y="704">Waist-Hip Ratio</text><text x="375" y="704">0.84</text><text x="520" y="704">Normal</text><text x="72" y="738">Visceral Fat Level</text><text x="375" y="738">6.6</text><text x="520" y="738">Normal</text><text x="72" y="772">FitMao Score</text><text x="375" y="772">75</text><text x="72" y="806">Physiological Age</text><text x="375" y="806">22 years</text></g>
+    <rect x="54" y="838" width="612" height="52" rx="6" fill="#ddeeef"/><text x="72" y="871" font-size="20" font-weight="700" fill="#123f43">Body Type &amp; Weight Control</text>
+    <g font-size="16" fill="#182022"><text x="72" y="924">Body Type</text><text x="375" y="924">Overweight/OverFat</text><text x="72" y="958">Target Weight</text><text x="375" y="958">62.5 kg</text><text x="72" y="992">Weight / Fat Control</text><text x="375" y="992">-7.1 kg / -7.1 kg</text></g>
+  </g>
+</svg>

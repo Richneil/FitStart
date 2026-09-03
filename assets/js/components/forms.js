@@ -1,7 +1,3 @@
-import { escapeHtml, label } from "./ui.js";
-
-export function radioGroup(name,values,current){return `<div class="choice-grid">${values.map(value=>`<div class="choice"><input type="radio" id="${name}-${value}" name="${name}" value="${value}" ${current===value?"checked":""}><label for="${name}-${value}">${label(value)}</label></div>`).join("")}</div>`;}
-export function chips(name,values,current=[]){return `<div class="chip-group">${values.map(value=>`<div class="chip"><input type="checkbox" id="${name}-${value}" name="${name}" value="${value}" ${current.includes(value)?"checked":""}><label for="${name}-${value}">${label(value)}</label></div>`).join("")}</div>`;}
-export function selectOptions(values,current,blank="Select one"){return `<option value="">${escapeHtml(blank)}</option>${values.map(value=>`<option value="${value}" ${current===value?"selected":""}>${label(value)}</option>`).join("")}`;}
-export function formValue(form,name){return new FormData(form).get(name)?.toString()||""}
-export function formValues(form,name){return new FormData(form).getAll(name).map(String)}
+import { escapeHtml } from "./ui.js";
+export const fieldError=(name,message="")=>`<p class="field-error" data-error="${escapeHtml(name)}" aria-live="polite">${escapeHtml(message)}</p>`;
+export const radioCards=(name,options,current="")=>`<div class="choice-grid">${options.map(([value,label,help=""])=>`<label class="choice-card"><input type="radio" name="${escapeHtml(name)}" value="${escapeHtml(value)}" ${value===current?"checked":""}><span><strong>${escapeHtml(label)}</strong>${help?`<small>${escapeHtml(help)}</small>`:""}</span></label>`).join("")}</div>`;

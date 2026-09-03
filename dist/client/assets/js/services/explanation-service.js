@@ -1,25 +1,20 @@
-import { getMetricDefinition } from "../data/metric-library.js";
-import { optionLabels } from "../data/demo-profile.js";
+import { labels } from "../data/demo-data.js";
 
-export function explainMetric(item, profile) {
-  const definition = getMetricDefinition(item.id);
-  const goal = optionLabels[profile.primaryGoal] || "your stated goal";
-  const depth = profile.experience === "experienced" ? definition?.represents : definition?.definition;
+const displayValue = metric => `${metric.value}${metric.unit && metric.unit !== "—" ? ` ${metric.unit}` : ""}`;
+const evidenceText = focus => focus.supporting.filter(metric => ["Under","Over"].includes(metric.status)).slice(0,2).map(metric => `${metric.name} is ${displayValue(metric)} (${metric.status}${metric.range && metric.range !== "Chart band" ? `; printed reference ${metric.range}` : " band"})`);
+
+export function explainFocus(focus, profile) {
+  if (!focus) return null;
+  const primary = labels[profile.primaryGoal] || "your main goal";
+  const secondary = labels[profile.secondaryGoal] || "";
+  const evidence = evidenceText(focus);
+  const strongest = evidence.length ? evidence.join(" and ") : `${focus.supporting[0]?.name || "a supporting measurement"} appears in your confirmed report`;
+  const isNew = profile.fitnessExperience === "new" || profile.assessmentFamiliarity === "not-familiar";
   return {
-    meaning: depth || "This measurement provides body-composition context.",
-    toldUs: `Your main goal is ${goal}${profile.activities?.length ? ` and you prefer ${profile.activities.map(id=>optionLabels[id]).join(" and ").toLowerCase()}` : ""}.`,
-    showed: `Your report showed ${item.name} as ${item.value} ${item.unit} and labelled it “${item.sourceCategoryLabel}.”`,
-    why: item.primaryMatch ? `This result comes first because the report says it is worth reviewing and it connects with your ${goal.toLowerCase()} goal.` : `This result comes first because of its report label and how it connects with the other measurements.`,
-    limitation: definition?.limitation || "Interpret this result with a qualified fitness professional."
+    definition:isNew ? focus.definition : `${focus.definition} Supporting measurements stay grouped so related results are not counted as separate priorities.`,
+    toldUs:`You selected ${primary} as your primary goal${secondary ? ` and ${secondary} as your secondary goal` : ""}.`,
+    showed:`Your FitMao report shows ${strongest}.`,
+    why:`FITSTART ranked ${focus.label} here because the confirmed report evidence${focus.primary ? ` directly relates to your ${primary} goal` : " was relevant under the demonstration rules"}.`,
+    recommendation:`We recommend reviewing ${focus.label} first because it is supported by your confirmed FitMao results and your stated goal. Discuss appropriate exercise and nutrition strategies with a qualified fitness professional.`
   };
-}
-
-export function quickWins(profile) {
-  const wins = [];
-  if (profile.barriers?.includes("uncertainty")) wins.push("Choose one priority to understand first instead of trying to interpret every number at once.");
-  if (profile.barriers?.includes("time")) wins.push("Set aside one short, low-complexity check-in to review the result with a qualified fitness professional.");
-  if (profile.confidence === "low" || profile.barriers?.includes("confidence")) wins.push("Bring the full report and ask a qualified fitness professional to clarify any unfamiliar terms.");
-  if (profile.activities?.length) wins.push(`Use your interest in ${profile.activities.map(id=>optionLabels[id]).join(" and ").toLowerCase()} as context when discussing realistic first steps.`);
-  wins.push("Use consistent measurement conditions if you complete another assessment.");
-  return [...new Set(wins)].slice(0,3);
 }

@@ -1,16 +1,10 @@
-import { escapeHtml, label } from "./ui.js";
-
-const navItems=[
-  ["#/dashboard","Home","⌂","dashboard"],["#/assessment/import","Add Assessment","＋","assessment-import"],
-  ["#/results","My Results","◎","results"],["#/learn","Glossary","◫","learn"],["#/profile","Profile","○","profile"]
-];
-
-export function appShell(content,route,state,title="FITSTART") {
-  const hasResult=Boolean(state.latestResult); const canCompare=state.assessments.length>=2;
-  const links=navItems.map(([href,text,icon,key])=>{
-    const disabled=(key==="results"&&!hasResult)||(key==="compare"&&!canCompare);
-    return `<a class="nav-link${disabled?" is-disabled":""}" href="${disabled?"#/dashboard":href}" ${route.startsWith(key)?'aria-current="page"':""} ${disabled?'aria-disabled="true"':''}><span class="nav-icon" aria-hidden="true">${icon}</span><span>${text}</span></a>`;
-  }).join("");
-  const mobile=[navItems[0],navItems[1],navItems[2],navItems[3],["#/profile","More","•••","profile"]].map(([href,text,icon,key])=>{const disabled=key==="results"&&!hasResult;return `<a class="nav-link${disabled?" is-disabled":""}" href="${disabled?"#/dashboard":href}" ${route.startsWith(key)?'aria-current="page"':""} ${disabled?'aria-disabled="true"':""}><span aria-hidden="true">${icon}</span><span>${text}</span></a>`}).join("");
-  return `<div class="app-shell"><aside class="sidebar"><a class="brand" href="#/dashboard"><span class="brand-mark">FS</span><span>FITSTART</span></a><nav class="side-nav" aria-label="Primary">${links}</nav><div class="sidebar-footer"><p><strong>${escapeHtml(state.profile?.displayName||"Member")}</strong></p><p class="supporting">${label(state.profile?.primaryGoal)||"No goal saved"}</p><button class="text-link danger-link" data-action="clear-data">Clear saved data</button></div></aside><header class="mobile-header"><a class="brand" href="#/dashboard"><span class="brand-mark">FS</span><span class="sr-only">FITSTART</span></a><strong>${escapeHtml(title)}</strong><a class="icon-button button" href="#/profile" aria-label="Open profile">○</a></header><main class="app-main" id="main-content" tabindex="-1">${content}</main><nav class="mobile-nav" aria-label="Mobile navigation">${mobile}</nav></div>`;
+import { escapeHtml, label, demoBanner } from "./ui.js";
+const items=[["#/dashboard","Dashboard","⌂","dashboard"],["#/assessment/add","Add Assessment","＋","assessment"],["#/results","Results","◎","results"],["#/compare","Compare","↔","compare"],["#/glossary","Glossary","?","glossary"],["#/profile","Profile","○","profile"]];
+const active=(route,key)=>route===key||route.startsWith(`${key}-`)||key==="assessment"&&route.startsWith("assessment")||key==="results"&&["focus-detail","summary"].includes(route)||key==="profile"&&["report","compare","research"].includes(route);
+export function appShell(content,route,state,title){
+  const hasAssessment=state.assessments.length>0,hasResult=Boolean(state.latestResult),canCompare=state.assessments.length>1;
+  const disabled=key=>(key==="results"&&!hasResult)||(key==="compare"&&!canCompare);
+  const side=items.map(([href,text,icon,key])=>`<a class="nav-link ${active(route,key)?"is-active":""} ${disabled(key)?"is-disabled":""}" href="${disabled(key)?"#/dashboard":href}" ${active(route,key)?'aria-current="page"':""} ${disabled(key)?`aria-disabled="true" title="${key==="compare"?"Add two confirmed assessments to compare":"Confirm an assessment to unlock results"}"`:""}><span aria-hidden="true">${icon}</span><span>${text}</span>${disabled(key)?'<small>Locked</small>':""}</a>`).join("");
+  const mobile=[["#/dashboard","Home","⌂","dashboard"],["#/assessment/add","Assess","＋","assessment"],["#/results","Results","◎","results"],["#/glossary","Learn","?","glossary"],["#/profile","More","•••","profile"]].map(([href,text,icon,key])=>`<a class="${active(route,key)?"is-active":""} ${disabled(key)?"is-disabled":""}" href="${disabled(key)?"#/dashboard":href}" ${active(route,key)?'aria-current="page"':""}><span aria-hidden="true">${icon}</span><small>${text}</small></a>`).join("");
+  return `<div class="app-shell"><aside class="sidebar"><a class="brand" href="#/dashboard"><span class="brand-mark">FS</span><span>FITSTART</span></a><nav aria-label="Primary navigation">${side}</nav><div class="sidebar-foot"><p>Educational prototype</p><button class="text-button" data-action="sign-out">Sign Out</button></div></aside><header class="mobile-header"><a class="brand-mark" href="#/dashboard">FS</a><strong>${escapeHtml(title||"FITSTART")}</strong><a class="icon-button" href="#/profile" aria-label="Open more options">•••</a></header><main id="main-content" class="app-main" tabindex="-1">${demoBanner(state)}${content}</main><nav class="mobile-nav" aria-label="Mobile navigation">${mobile}</nav></div>`;
 }
