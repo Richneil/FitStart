@@ -1,12 +1,12 @@
-import { store } from "./store.js?v=9";
-import { startRouter, matchRoute, go } from "./router.js?v=9";
-import { appShell, guidedShell } from "./components/navigation.js?v=9";
+import { store } from "./store.js?v=10";
+import { startRouter, matchRoute, go } from "./router.js?v=10";
+import { appShell, guidedShell } from "./components/navigation.js?v=10";
 import { modal, toast, label } from "./components/ui.js";
 import { metricDefinitions } from "./data/fitmao-metrics.js";
-import { fictionalDemoProfile } from "./data/demo-data.js?v=9";
-import { createImportDraft, validateReportFile } from "./services/report-import-service.js?v=9";
-import { simulateExtraction, assessmentFromExtraction } from "./services/extraction-service.js?v=9";
-import * as views from "./views/all-views.js?v=9";
+import { fictionalDemoProfile } from "./data/demo-data.js?v=10";
+import { createImportDraft, validateReportFile } from "./services/report-import-service.js?v=10";
+import { simulateExtraction, assessmentFromExtraction } from "./services/extraction-service.js?v=10";
+import * as views from "./views/all-views.js?v=10";
 
 const app=document.querySelector("#app");
 let processingTimer=null,importTimer=null,previewObjectUrl=null,previewZoom=1,dirty=false,corruptionShown=false;
@@ -57,6 +57,7 @@ function render(){
   };
   const content=(map[route.name]||map["not-found"])();
   app.innerHTML=route.name==="welcome"||route.name==="auth"?content:guidedRoutes.includes(route.name)?guidedShell(content,route.name,titles[route.name],state):appShell(content,route.name,state,titles[route.name]);
+  if(route.name==="assessment-review")simplifyReviewStatuses();
   if(route.name==="auth"&&!state.profile?.email){const email=app.querySelector("#auth-email");if(email){email.value="";email.placeholder="you@example.com"}}
   document.title=`${titles[route.name]||"FITSTART"} — FITSTART`;
   window.scrollTo(0,0);
@@ -72,6 +73,15 @@ const formValue=(form,name)=>form.elements[name]?.value?.trim?.()??form.elements
 const formError=(form,key,message)=>{const target=form.querySelector(`[data-error="${key}"]`);if(target){target.textContent=message;target.focus?.()} };
 const metricIsNumeric=metric=>metric.unit!=="—"&&!['segmental-fat','body-type'].includes(metric.id);
 const blankDraft=()=>({id:"draft",assessedAt:new Date().toISOString().slice(0,10),sourceType:"manual",verified:false,demographics:{displayName:"",age:"",gender:"",height:"",assessmentDate:new Date().toISOString().slice(0,10)},metrics:metricDefinitions.map(metric=>({...metric,value:"",status:"Not provided",available:false,captureStatus:"manual"}))});
+
+function simplifyReviewStatuses(){
+  document.querySelectorAll("#review-form .edit-row").forEach(row=>{
+    const field=row.querySelector(":scope > .field"),select=field?.querySelector("select");
+    if(!select)return;
+    const status=document.createElement("span");status.className="report-status";status.textContent=`FitMao status: ${select.value}`;
+    row.firstElementChild?.append(status);field.remove();
+  });
+}
 
 function releasePreview(){if(previewObjectUrl){URL.revokeObjectURL(previewObjectUrl);previewObjectUrl=null}previewZoom=1}
 
@@ -127,7 +137,7 @@ document.addEventListener("submit",event=>{
     const details={displayName:formValue(form,"displayName"),age:formValue(form,"age"),gender:formValue(form,"gender"),height:formValue(form,"height"),assessmentDate:formValue(form,"assessmentDate")};
     if(!details.displayName||!details.assessmentDate)return formError(form,"review","Check the member name and assessment date before continuing.");
     let invalidMetric="";
-    draft.metrics=draft.metrics.map(metric=>{const raw=formValue(form,`metric-${metric.id}`),numeric=metricIsNumeric(metric);if(raw!==""&&numeric&&!Number.isFinite(Number(raw)))invalidMetric=metric.name;const original=source?.metrics?.find(item=>item.id===metric.id);const changed=String(original?.value??"")!==String(raw)||String(original?.status??"")!==String(formValue(form,`status-${metric.id}`));return{...metric,value:raw===""?"":numeric?Number(raw):raw,status:formValue(form,`status-${metric.id}`),available:raw!=="",captureStatus:raw===""?"missing":changed?"corrected":metric.captureStatus||"extracted"}});
+    draft.metrics=draft.metrics.map(metric=>{const raw=formValue(form,`metric-${metric.id}`),numeric=metricIsNumeric(metric),statusInput=form.elements[`status-${metric.id}`],status=statusInput?formValue(form,`status-${metric.id}`):metric.status;if(raw!==""&&numeric&&!Number.isFinite(Number(raw)))invalidMetric=metric.name;const original=source?.metrics?.find(item=>item.id===metric.id);const changed=String(original?.value??"")!==String(raw)||String(original?.status??"")!==String(status);return{...metric,value:raw===""?"":numeric?Number(raw):raw,status,available:raw!=="",captureStatus:raw===""?"missing":changed?"corrected":metric.captureStatus||"extracted"}});
     if(invalidMetric)return formError(form,"review",`Enter a valid number for ${invalidMetric}.`);
     const missing=["weight","pbf","smm"].filter(id=>!draft.metrics.find(metric=>metric.id===id)?.available);if(missing.length)return formError(form,"review","Body weight, body fat percentage, and muscle mass are required.");
     if(!form.elements.reviewed.checked)return formError(form,"review","Confirm that you reviewed the values against your FitMao report.");

@@ -153,6 +153,22 @@
 .save-prompt h2{margin-bottom:6px}
 .save-prompt p:last-child{margin-bottom:0;color:var(--color-muted)}
 .dashboard-tools{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.dashboard-member-hero{display:grid;gap:24px;padding:34px 38px;border-radius:24px;background:linear-gradient(135deg,var(--color-primary-800),var(--color-primary-600));box-shadow:0 18px 44px rgba(18,63,67,.16);color:#fff}
+.member-hero-head{display:flex;justify-content:space-between;align-items:center;gap:24px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.18)}
+.dashboard-member-hero .eyebrow,.dashboard-member-hero h2,.dashboard-member-hero h3{color:#fff}
+.dashboard-member-hero h2{font-size:clamp(2rem,4vw,3.2rem);margin:2px 0 0}
+.member-goal{display:grid;gap:3px;min-width:190px;padding:13px 16px;border:1px solid rgba(255,255,255,.22);border-radius:14px;background:rgba(255,255,255,.11)}
+.member-goal small{color:#d8e7e6}
+.member-goal strong{color:#fff;font-size:1.08rem}
+.member-focus{max-width:760px}
+.member-focus h3{font-size:clamp(2.1rem,4vw,3.4rem);margin:7px 0 8px}
+.member-focus p{color:#dcebea}
+.member-focus .supporting{margin-bottom:0;font-size:.86rem}
+.member-hero-actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.hero-text-link{min-height:44px;display:inline-flex;align-items:center;color:#fff;font-weight:800;text-underline-offset:4px}
+.metric-editor .edit-row{grid-template-columns:minmax(0,1fr) minmax(160px,220px);align-items:center}
+.metric-editor .edit-row>.field{display:none}
+.report-status{width:max-content;max-width:100%;margin-top:7px;padding:4px 9px;border-radius:999px;background:#edf4f3;color:var(--color-primary-700);font-size:.74rem;font-weight:750}
 
 @media(max-width:1023px){
   .welcome-import-hero{grid-template-columns:1fr 1fr;gap:32px}
@@ -183,6 +199,12 @@
   .import-source{grid-template-columns:80px 1fr}
   .import-source img,.import-source object{width:80px;height:90px}
   .save-prompt{display:grid}
+  .dashboard-member-hero{padding:24px 20px}
+  .member-hero-head{display:grid}
+  .member-goal{min-width:0;width:100%}
+  .member-hero-actions{display:grid;gap:8px}
+  .member-hero-actions .button{width:100%}
+  .metric-editor .edit-row{grid-template-columns:1fr}
   .final-summary dl>div{display:grid;gap:3px}
   .final-summary dd{text-align:left}
 }

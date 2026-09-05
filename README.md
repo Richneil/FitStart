@@ -14,6 +14,8 @@ This is an educational frontend prototype. It does not diagnose conditions, pred
 - Keeps manual entry as a recovery option, not the main path.
 - Includes an optional, clearly labelled fictional Maria Santos demo path.
 - Stores at most two confirmed assessments for a simple comparison.
+- Simplifies report review by showing the FitMao status as a readable badge instead of an editable technical dropdown.
+- Combines the member name, current goal, and main focus in one clear Dashboard card.
 
 ## Download or pull from GitHub
 

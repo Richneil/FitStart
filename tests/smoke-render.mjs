@@ -41,7 +41,10 @@ if(!views.authView(full).includes("simulated")||!views.authView(full).includes("
 if(ranking.mainFocus?.id!=="bodyFat")throw new Error(`Expected body fat as the starting point, received ${ranking.mainFocus?.id}.`);
 if(ranking.mainFocus.supporting.filter(item=>["Under","Over"].includes(item.status)).length<2)throw new Error("Body-fat supporting evidence is incomplete.");
 if(!views.compareView(full).includes("two newest confirmed reports"))throw new Error("Two-report comparison is missing.");
-if(!views.dashboardView(full).includes("Assessment history")||!views.dashboardView(full).includes("View interpreted results"))throw new Error("Assessment history is missing from Dashboard.");
+const dashboard=views.dashboardView(full);
+if(!dashboard.includes("dashboard-member-hero")||!dashboard.includes("Hi, Maria Santos")||!dashboard.includes("Current goal"))throw new Error("The simplified member-and-goal Dashboard hero is missing.");
+if(dashboard.includes("Save this result?")||dashboard.includes("dashboard-tools"))throw new Error("Removed Dashboard panels are still present.");
+if(!dashboard.includes("Assessment history")||!dashboard.includes("View interpreted results"))throw new Error("Assessment history is missing from Dashboard.");
 if(validateReportFile({type:"text/plain",size:20}).ok)throw new Error("Unsupported report files are accepted.");
 if(!validateReportFile({type:"image/png",size:1024}).ok)throw new Error("Valid report files are rejected.");
 if(matchRoute("#/assessment/importing").name!=="assessment-importing"||matchRoute("#/personalize").name!=="personalize")throw new Error("New sequence routes are not connected.");

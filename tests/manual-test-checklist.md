@@ -19,6 +19,7 @@ Updated September 5, 2026 for the v3 automatic-first prototype sequence.
 - [ ] Upload accepts PNG, JPG, and PDF within the stated size limit.
 - [ ] Reading progress moves through upload, detection, extraction, and ready states.
 - [ ] The review screen shows the source preview, demographics, all available values, and captured/corrected/missing labels.
+- [ ] Review rows show a readable FitMao status badge and no **Original report position** dropdown.
 - [ ] Results stay locked until the required verification checkbox is selected.
 - [ ] Personalization asks only the four required fitness-context questions.
 - [ ] The final check provides **Edit Assessment**, **Change My Answers**, and **Yes, Create My Results**.
@@ -43,6 +44,7 @@ Updated September 5, 2026 for the v3 automatic-first prototype sequence.
 - [ ] Every priority explains why it was selected in everyday language.
 - [ ] Trainer guidance encourages discussion without giving medical, workout, or diet prescriptions.
 - [ ] Dashboard history reopens each confirmed assessment's interpreted results.
+- [ ] Dashboard places the member name, current goal, and main focus in one green card without the removed guest-save and shortcut panels.
 - [ ] The full report preserves official FitMao terms beside simpler names.
 - [ ] Glossary search, filters, related terms, and limitations work.
 - [ ] Research details remain inside the Profile's optional researcher controls.
