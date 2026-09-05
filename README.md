@@ -11,6 +11,7 @@ FITSTART organizes and explains report information. It does not diagnose health 
 - Replaced the Home page's extra-options panel with Assessment History.
 - Added report-history cards and working links to reopen each assessment's interpreted results.
 - Increased saved history to the 10 newest reports while comparison continues to use the newest two.
+- Clarified the QR/screenshot flow: details open automatically for review and confirmation.
 
 ## Get the project from GitHub
 
@@ -42,7 +43,7 @@ Then open `http://127.0.0.1:4173/#/welcome` in a browser.
 
 1. Read the short introduction and start a local test session.
 2. Enter a name or nickname, choose a goal, and select an explanation level.
-3. Add a FitMao report by screenshot, QR test, or typed values.
+3. Add a FitMao report by screenshot or QR test.
 4. Check the report values in six collapsible sections.
 5. Confirm the member details used to organize the results.
 6. View the recommended starting point and why it appears first.
@@ -62,8 +63,7 @@ There is no named member demo and no fake sign-in. Every tester begins with a cl
 | `#/dashboard` | Home page, newest starting point, and assessment history |
 | `#/history/:assessmentId` | Interpreted results for a saved assessment |
 | `#/assessment/add` | Choose how to add a report |
-| `#/assessment/manual` | Type report values |
-| `#/assessment/review` | Check imported or typed values |
+| `#/assessment/review` | Check the imported report details and correct anything that does not match |
 | `#/context/confirm` | Confirm goal and explanation preference |
 | `#/results` | Starting point and next results to review |
 | `#/results/focus/:focusId` | Detailed explanation for one result area |

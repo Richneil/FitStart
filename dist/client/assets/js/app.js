@@ -52,7 +52,7 @@ document.addEventListener("submit",event=>{
 
 document.addEventListener("change",event=>{
   if(event.target.closest("form"))dirty=true;
-  if(event.target.id==="report-upload"){const file=event.target.files?.[0],button=document.querySelector('[data-action="use-upload"]');if(!file)return;if(previewObjectUrl)URL.revokeObjectURL(previewObjectUrl);previewObjectUrl=URL.createObjectURL(file);button.disabled=false;button.textContent=`Continue with ${file.name}`;button.dataset.fileName=file.name;toast("Screenshot selected. Continue when ready.")}
+  if(event.target.id==="report-upload"){const file=event.target.files?.[0];if(!file)return;if(previewObjectUrl)URL.revokeObjectURL(previewObjectUrl);previewObjectUrl=URL.createObjectURL(file);const draft=draftFromSample("screenshot",file.name);draft.previewUrl=previewObjectUrl;store.update(d=>{d.draftAssessment=draft;return d},false);go("#/assessment/review")}
   if(event.target.matches('[data-action="toggle-research"]')){store.update(d=>{d.ui.researchMode=event.target.checked;return d});toast(`Research Mode ${event.target.checked?"enabled":"disabled"}.`);render()}
 });
 document.addEventListener("input",event=>{if(event.target.closest("form"))dirty=true;if(event.target.id==="glossary-search")filterGlossary()});
@@ -63,7 +63,6 @@ document.addEventListener("click",event=>{
   if(action==="open-boundaries")modal({title:"What FITSTART does and does not do",body:"<p><strong>FITSTART does:</strong> capture confirmed FitMao values, group related measurements, connect them with your stated goal, and explain what information to review first.</p><p><strong>FITSTART does not:</strong> diagnose, predict disease, prescribe workouts or diets, manage gym membership, or replace a qualified professional.</p>",confirmText:"I Understand"})
   if(action==="onboarding-back"){store.update(d=>{d.ui.onboardingStep=Math.max(1,d.ui.onboardingStep-1);return d});render()}
   if(action==="use-qr"){store.update(d=>{d.draftAssessment=draftFromSample("qr");return d});go("#/assessment/review")}
-  if(action==="use-upload"){const fileName=event.target.closest("[data-action]").dataset.fileName||"report-screenshot.png",draft=draftFromSample("screenshot",fileName);draft.previewUrl=previewObjectUrl;store.update(d=>{d.draftAssessment=draft;return d},false);go("#/assessment/review")}
   if(action==="save-manual")saveManual(event.target.closest("form"),false)
   if(action==="edit-latest-assessment"){const state=store.get(),draft=structuredClone(state.assessments.at(-1));draft.editingAssessmentId=draft.id;draft.verified=false;store.update(d=>{d.draftAssessment=draft;return d});go("#/assessment/review")}
   if(action==="generate-results"){store.generateResult();go("#/processing")}

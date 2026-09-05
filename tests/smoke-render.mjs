@@ -30,7 +30,9 @@ for(const [index,html] of pages.entries()){
 }
 if(ranking.mainFocus?.id!=="bodyFat")throw new Error(`Expected body fat as the starting point, received ${ranking.mainFocus?.id}.`);
 if(ranking.mainFocus.supporting.filter(item=>["Under","Over"].includes(item.status)).length<2)throw new Error("Body-fat supporting evidence is incomplete.");
-if(!views.assessmentAddView().includes("Type the values yourself"))throw new Error("Manual report entry option is missing.");
+if(views.assessmentAddView().includes("Type the values yourself"))throw new Error("Manual report entry still appears in the main journey.");
+if(!views.welcomeView().includes("Scan or upload your report")||!views.welcomeView().includes("Confirm or correct them"))throw new Error("Welcome does not explain the scan, review, and confirmation flow.");
+if(!views.assessmentReviewView(full).includes("Does this look right?"))throw new Error("Imported details do not ask for confirmation.");
 if(!views.compareView(empty).includes("second FitMao assessment"))throw new Error("Locked comparison state is missing.");
 if(!views.dashboardView(full).includes("Assessment history")||!views.dashboardView(full).includes("View interpreted results"))throw new Error("Assessment history is missing from Home.");
 if(!views.historyResultView(full,assessments[0].id).includes("Earlier saved assessment"))throw new Error("Saved assessment results cannot be reopened.");

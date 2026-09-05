@@ -13,7 +13,7 @@ Reworked September 3, 2026 for first-time gym members and usability-test partici
 
 ## Start and profile
 
-- [x] Welcome explains the experience in three simple steps.
+- [x] Welcome explains the scan or upload, automatic review, and confirmation flow.
 - [x] Testers see a short before-you-begin screen instead of fake sign-in fields.
 - [x] New and returning testers cannot load the old named sample profile.
 - [x] Profile setup asks name, goals, experience, and preferred explanation level in four short steps.
@@ -21,7 +21,8 @@ Reworked September 3, 2026 for first-time gym members and usability-test partici
 
 ## Assessment journey
 
-- [x] Upload, QR, and type-it-yourself choices lead to working test flows.
+- [x] Upload and QR choices lead directly to a filled review screen.
+- [x] The manual-entry choice is removed from the main journey.
 - [x] Screenshot and QR limitations are explained before sample values appear.
 - [x] Uploaded image bytes are not saved to browser storage.
 - [x] Report values are grouped in collapsible, plainly named sections.
