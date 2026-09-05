@@ -13,9 +13,11 @@ const initial=()=>({
   profile:null,
   importDraft:null,
   draftAssessment:null,
+  resultAssessment:null,
+  readiness:{answers:{},completed:false,hasPositive:false,completedAt:null},
   assessments:[],
   latestResult:null,
-  ui:{personalizationComplete:false,lastRoute:"#/welcome",researchMode:false,importStep:0,dismissedNotices:[]}
+  ui:{personalizationComplete:false,lastRoute:"#/welcome",researchMode:false,importStep:0,dismissedNotices:[],authIntent:null}
 });
 
 function read(){
@@ -37,10 +39,13 @@ export const store={
   meta:()=>({storageAvailable:storage.available(),storageCorrupt:corrupt}),
   subscribe(fn){listeners.add(fn);return()=>listeners.delete(fn)},
   update(fn,save=true){const draft=structuredClone(state);state=fn(draft)||draft;if(save)persist();listeners.forEach(fn=>fn(store.get()))},
-  setImportDraft(importDraft){store.update(d=>{d.importDraft=importDraft;d.draftAssessment=null;d.ui.importStep=0;return d})},
-  verifyDraft(assessment,importDraft){store.update(d=>{d.draftAssessment={...assessment,verified:true};d.importDraft={...importDraft,memberVerified:true};return d})},
-  confirmAssessment(assessment){store.update(d=>{const confirmed={...assessment,verified:true,id:assessment.editingAssessmentId||`assessment-${Date.now()}`};delete confirmed.editingAssessmentId;delete confirmed.previewUrl;const index=d.assessments.findIndex(item=>item.id===confirmed.id);if(index>=0)d.assessments[index]=confirmed;else d.assessments=[...d.assessments,confirmed].slice(-2);d.draftAssessment=null;d.importDraft=null;d.latestResult=null;return d})},
-  generateResult(){store.update(d=>{const assessment=d.assessments.at(-1);const ranking=rankFocusAreas(assessment,d.profile);d.latestResult={assessmentId:assessment?.id||null,generatedAt:new Date().toISOString(),ranking};return d})},
+  setImportDraft(importDraft){store.update(d=>{d.importDraft=importDraft;d.draftAssessment=null;d.resultAssessment=null;d.readiness=initial().readiness;d.ui.personalizationComplete=false;d.ui.importStep=0;return d})},
+  verifyDraft(assessment,importDraft){store.update(d=>{d.draftAssessment={...assessment,verified:true};d.importDraft={...importDraft,memberVerified:true};d.readiness=initial().readiness;d.ui.personalizationComplete=false;return d})},
+  completeReadiness(answers){store.update(d=>{d.readiness={answers:{...answers},completed:true,hasPositive:Object.values(answers).includes("yes"),completedAt:new Date().toISOString()};return d})},
+  prepareResult(assessment){store.update(d=>{const confirmed={...assessment,verified:true,id:assessment.editingAssessmentId||`assessment-${Date.now()}`};delete confirmed.editingAssessmentId;delete confirmed.previewUrl;d.resultAssessment=confirmed;d.draftAssessment=null;d.importDraft=null;d.latestResult=null;return d})},
+  saveCurrentAssessment(){let saved=null;store.update(d=>{const current=d.resultAssessment;if(!current||!d.session.signedIn)return d;saved={...current};const index=d.assessments.findIndex(item=>item.id===current.id);if(index>=0)d.assessments[index]=saved;else d.assessments=[...d.assessments,saved].slice(-2);d.ui.authIntent=null;return d});return saved},
+  confirmAssessment(assessment){store.prepareResult(assessment)},
+  generateResult(){store.update(d=>{const assessment=d.resultAssessment||d.assessments.at(-1);const ranking=rankFocusAreas(assessment,d.profile);d.latestResult={assessmentId:assessment?.id||null,generatedAt:new Date().toISOString(),ranking};return d})},
   startSession(method="prototype-email"){store.update(d=>{d.session={mode:"saved-account",signedIn:true,authMethod:method};return d})},
   continueAsGuest(){store.update(d=>{d.session={mode:"guest-demo",signedIn:false,authMethod:null};return d})},
   signOut(){store.update(d=>{d.session={mode:"guest-demo",signedIn:false,authMethod:null};return d})},

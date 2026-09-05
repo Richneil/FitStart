@@ -6,10 +6,14 @@ const items=[["#/dashboard","Dashboard","home","dashboard"],["#/assessment/add",
 const active=(route,key)=>route===key||route.startsWith(`${key}-`)||key==="dashboard"&&route==="history"||key==="assessment"&&route.startsWith("assessment")||key==="results"&&["focus-detail","summary"].includes(route)||key==="profile"&&["report","research"].includes(route);
 
 export function guidedShell(content,route,title,state){
-  const steps=["assessment-add","assessment-importing","assessment-review","personalize","context-confirm","processing"];
+  const steps=["assessment-add","assessment-importing","assessment-review","readiness","personalize","context-confirm","processing"];
   const step=Math.max(0,steps.indexOf(route));
-  const labels=["Add report","Read report","Verify","Personalize","Confirm","Prepare results"];
+  const labels=["Add report","Read report","Verify","Safety check","Personalize","Confirm","Prepare"];
   return `<div class="guided-shell"><header class="guided-header"><a class="brand" href="#/welcome"><span class="brand-mark">FS</span><span>FITSTART</span></a><nav aria-label="Guided-flow links"><a href="#/welcome">How it works</a><a href="#/glossary">Glossary</a>${state.session.signedIn?'':'<a href="#/sign-in">Sign in</a>'}</nav></header><div class="guided-title"><strong>${escapeHtml(title)}</strong></div><div class="guided-progress" aria-label="Assessment progress"><span>Step ${step+1} of ${labels.length}</span><ol>${labels.map((label,index)=>`<li class="${index<step?"is-done":index===step?"is-active":""}"><span>${index<step?"✓":index+1}</span><small>${label}</small></li>`).join("")}</ol></div><main id="main-content" tabindex="-1">${content}</main></div>`;
+}
+
+export function guestShell(content,title,state={}){
+  return `<div class="guest-shell"><header class="guest-header"><a class="brand" href="#/welcome"><span class="brand-mark">FS</span><span>FITSTART</span></a><nav aria-label="Guest navigation">${state.latestResult?'<a href="#/results">My result</a>':""}<a href="#/glossary">Glossary</a><a class="button button-secondary" href="#/sign-in">Sign in to save</a></nav></header><div class="guest-title"><strong>${escapeHtml(title||"FITSTART")}</strong><span>Viewing as guest</span></div><main id="main-content" class="guest-main" tabindex="-1">${content}</main></div>`;
 }
 
 export function appShell(content,route,state,title){

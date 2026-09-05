@@ -1,69 +1,47 @@
 # FITSTART Manual Test Checklist
 
-Updated September 5, 2026 for the v3 automatic-first prototype sequence.
-
-## Automated evidence
-
-- [x] All JavaScript modules pass syntax validation.
-- [x] Twenty-four major screen and edge states render successfully.
-- [x] The same confirmed values always produce the same starting point.
-- [x] Import validation accepts PNG, JPG, and PDF and rejects unsupported files.
-- [x] The new import, verification, personalization, and results routes are connected.
+Updated September 5, 2026 for the guest-to-member sequence.
 
 ## Complete sequence
 
-- [ ] Welcome opens with equally clear **Scan FitMao QR** and **Upload FitMao Report** actions.
-- [ ] No profile, generic start, or sign-in gate appears before importing a report.
+- [ ] Welcome shows only **Scan FitMao QR** and **Upload FitMao Report** as starting choices.
+- [ ] No Maria demo, manual-entry option, profile form, or sign-in gate appears before import.
 - [ ] A privacy notice appears before camera or file access.
-- [ ] Camera access starts only after the user chooses Scan.
-- [ ] Upload accepts PNG, JPG, and PDF within the stated size limit.
-- [ ] Reading progress moves through upload, detection, extraction, and ready states.
-- [ ] The review screen shows the source preview, demographics, all available values, and captured/corrected/missing labels.
-- [ ] Review rows show a readable FitMao status badge and no **Original report position** dropdown.
-- [ ] Results stay locked until the required verification checkbox is selected.
-- [ ] Personalization asks only the four required fitness-context questions.
-- [ ] The final check provides **Edit Assessment**, **Change My Answers**, and **Yes, Create My Results**.
-- [ ] Results appear as a guest before optional simulated sign-in.
+- [ ] The review screen shows captured details and values with no **Original report position** dropdown.
+- [ ] The user must confirm the reviewed values before continuing.
+- [ ] Review continues to the readiness check, not directly to goals.
+- [ ] All seven readiness questions require a **Yes** or **No** answer.
+- [ ] Any **Yes** answer shows neutral safety guidance and does not block the educational result.
+- [ ] Readiness answers do not change the ranking result.
+- [ ] The final check includes readiness completion, the selected goal, and report details.
+- [ ] Results appear before any sign-up or sign-in requirement.
 
-## Recovery and limits
+## Guest and saved access
 
-- [ ] Denied camera access explains how to retry, upload, or use manual entry.
-- [ ] Missing QR and unreadable-report states provide clear recovery actions.
-- [ ] Invalid type and oversized-file messages explain the accepted formats and limit.
-- [ ] Manual entry is available as a fallback but is not promoted as the main path.
-- [ ] QR, upload, and Explore Demo simulations return the same sanitized fictional Maria Santos report.
-- [ ] The demo and all automatic reading paths are clearly disclosed as simulated.
-- [ ] A third confirmed report requires replacing an existing one; only two remain stored.
-- [ ] Comparison stays locked until two confirmed reports exist.
-- [ ] Corrupted or unavailable browser storage fails safely without losing the current screen.
+- [ ] A guest can view results, open explanations and the glossary, and print the trainer guide.
+- [ ] A guest does not see Dashboard, history, comparison, profile, or the complete saved report.
+- [ ] Direct guest navigation to a saved-only route returns safely to the result or Welcome.
+- [ ] **Save My Assessment for History** opens the simulated sign-up/sign-in screen.
+- [ ] Successful sign-up/sign-in saves the current assessment and opens the Dashboard.
+- [ ] Continuing as guest returns to the result without saving history.
+- [ ] A third saved report asks before replacing the oldest; only two remain.
 
-## Results and understanding
+## Recovery, clarity, and accessibility
 
-- [ ] The educational notice appears before the main result.
-- [ ] Main Focus appears before ranked supporting priorities.
-- [ ] Every priority explains why it was selected in everyday language.
-- [ ] Trainer guidance encourages discussion without giving medical, workout, or diet prescriptions.
-- [ ] Dashboard history reopens each confirmed assessment's interpreted results.
-- [ ] Dashboard places the member name, current goal, and main focus in one green card without the removed guest-save and shortcut panels.
-- [ ] The full report preserves official FitMao terms beside simpler names.
-- [ ] Glossary search, filters, related terms, and limitations work.
-- [ ] Research details remain inside the Profile's optional researcher controls.
-
-## Navigation, accessibility, and responsive checks
-
-- [ ] Test the complete journey without a mouse; focus remains visible and logical.
-- [ ] The skip link, headings, labels, inline errors, dialog focus, and live notices are understandable with a screen reader.
-- [ ] Important controls have at least 44-pixel touch targets.
-- [ ] Text and controls remain readable at 200% browser zoom.
-- [ ] Check widths 360, 390, 768, 1024, and 1440 pixels with no unintended horizontal scrolling.
-- [ ] Desktop sidebar and mobile bottom navigation use the same familiar destinations.
-- [ ] Reloading or using Back during each step returns to a safe, understandable state.
+- [ ] Denied camera access suggests retrying or uploading instead.
+- [ ] Missing QR and unreadable-report states provide clear recovery choices.
+- [ ] Every page has one clear next action and a useful Back action.
+- [ ] Plain-language labels are understandable to a new gym member.
+- [ ] Keyboard focus, labels, errors, dialogs, and live notices are understandable.
+- [ ] Controls have at least 44-pixel touch targets.
+- [ ] Layout remains readable at 360, 390, 768, 1024, and 1440 pixels and at 200% zoom.
 - [ ] No browser-console errors occur through the complete flow.
 
 ## Required expert review before production
 
-- [ ] Validate the FitMao import contract, metric definitions, ranges, and labels.
-- [ ] Validate focus grouping, goal relevance, evidence scoring, and tie order.
-- [ ] Approve glossary sources and member-facing explanations.
-- [ ] Define real authentication, consent, privacy, security, and data-retention requirements.
+- [ ] Approve or replace the PAR-Q-style wording and confirm licensing requirements.
+- [ ] Define the response protocol and escalation guidance for positive readiness answers.
+- [ ] Validate FitMao import fields, metric definitions, ranges, and labels.
+- [ ] Validate goal relevance, grouping, ranking, and tie rules.
+- [ ] Define real authentication, consent, privacy, security, and retention requirements.
 - [ ] Conduct moderated usability and comprehension testing with new gym members.

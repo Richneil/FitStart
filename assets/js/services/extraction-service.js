@@ -14,7 +14,7 @@ function extractedMetrics(sequence=0) {
 
 export function simulateExtraction(importDraft, sequence=0) {
   const name=(importDraft.fileName||"").toLowerCase();
-  if (name.includes("unreadable")) return {...importDraft,extractionStatus:"failed",errorType:"unreadable",errorMessage:"We could not read this report clearly. Try another file or enter the missing values manually."};
+  if (name.includes("unreadable")) return {...importDraft,extractionStatus:"failed",errorType:"unreadable",errorMessage:"We could not read this report clearly. Try scanning again or upload a clearer report."};
   const partial=name.includes("partial");
   const metrics=extractedMetrics(sequence).map(metric=>partial&&["body-water","whr","visceral-fat"].includes(metric.id)?{...metric,value:"",available:false,captureStatus:"missing"}:metric);
   const date=sequence?"2026-10-05":fictionalDemoMember.assessmentDate;

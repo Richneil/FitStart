@@ -11,7 +11,7 @@ import { metricRow } from "../components/metric-row.js";
 import { fictionalDemoProfile } from "../data/demo-data.js";
 import { ACCEPTED_REPORT_LABEL } from "../services/report-import-service.js";
 
-const latest=state=>state.assessments.at(-1);
+const latest=state=>state.resultAssessment||state.assessments.at(-1);
 const ranking=state=>state.latestResult?.ranking||rankFocusAreas(latest(state),state.profile);
 const sourceNotice=()=>notice("This prototype demonstrates the automatic review flow with sample report details. It does not read the real QR code or screenshot yet. Replace the sample values with those shown on your FitMao report.","info","About this test step");
 const stepper=(active,items=["Profile","Assessment","Results"])=>`<ol class="stepper" aria-label="Progress">${items.map((item,index)=>`<li class="${index+1===active?"is-active":index+1<active?"is-done":""}"><span>${index+1<active?"✓":index+1}</span><small>${item}</small></li>`).join("")}</ol>`;

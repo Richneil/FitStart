@@ -1,5 +1,5 @@
 export const fictionalDemoMember = {
-  displayName: "Maria Santos",
+  displayName: "Test Member",
   age: 24,
   gender: "Female",
   height: 165,
@@ -7,13 +7,13 @@ export const fictionalDemoMember = {
 };
 
 export const fictionalDemoProfile = {
-  id: "demo-maria",
+  id: "local-test-member",
   displayName: fictionalDemoMember.displayName,
-  email: "maria.demo@example.com",
+  email: "test.member@example.com",
   primaryGoal: "fat-loss",
   secondaryGoal: "general-fitness",
   fitnessExperience: "new",
   assessmentFamiliarity: "not-familiar"
 };
 
-export const demoDisclosure = "Fictional demonstration data based on the structure of a FitMao report.";
+export const demoDisclosure = "Sample values are used because QR and image reading are not connected in this frontend prototype. Check every value against your FitMao report before continuing.";

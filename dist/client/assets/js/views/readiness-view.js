@@ -1,0 +1,9 @@
+import { escapeHtml, pageHeader, notice } from "../components/ui.js";
+import { readinessQuestions } from "../data/readiness-questions.js";
+
+const answerChoice=(question,value,current)=>`<label class="readiness-choice"><input type="radio" name="readiness-${escapeHtml(question.id)}" value="${value}" ${current===value?"checked":""} required><span>${value==="yes"?"Yes":"No"}</span></label>`;
+
+export function readinessView(state={}){
+  const answers=state.readiness?.answers||{};
+  return `<div class="page narrow readiness-page">${pageHeader("Safety before personalization","Physical activity readiness check","Please answer every question. Your answers help identify when extra guidance may be useful before increasing physical activity.")}${notice("This short PAR-Q-style prototype check is for readiness context only. It does not diagnose a condition and it does not change how FITSTART ranks your assessment results.","info","Why we ask")}<form id="readiness-form" class="readiness-form"><ol class="readiness-list">${readinessQuestions.map((question,index)=>`<li class="card readiness-question"><span class="readiness-number" aria-hidden="true">${index+1}</span><fieldset><legend>${escapeHtml(question.text)}</legend><div class="readiness-choices">${answerChoice(question,"yes",answers[question.id])}${answerChoice(question,"no",answers[question.id])}</div></fieldset></li>`).join("")}</ol><p class="field-error" data-error="readiness" aria-live="polite" tabindex="-1"></p><div class="button-row spread"><a class="button button-secondary" href="#/assessment/review">Back to report</a><button class="button button-primary button-large" type="submit">Continue to my goals</button></div></form><p class="fine-print readiness-review-note">Prototype wording must be reviewed by the appropriate health, legal, and licensing experts before production use.</p></div>`;
+}

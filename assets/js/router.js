@@ -3,7 +3,7 @@ const routes=[
   ["assessment-add",/^#\/assessment\/add$/],
   ["assessment-importing",/^#\/assessment\/importing$/],
   ["assessment-review",/^#\/assessment\/review$/],
-  ["assessment-manual",/^#\/assessment\/manual$/],
+  ["readiness",/^#\/readiness$/],
   ["personalize",/^#\/personalize$/],
   ["context-confirm",/^#\/context\/confirm$/],
   ["processing",/^#\/processing$/],
