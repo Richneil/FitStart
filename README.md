@@ -12,7 +12,7 @@ This is an educational frontend prototype. It does not diagnose conditions, pred
 - Collects only the fitness context needed to personalize the explanation.
 - Shows results before asking the tester to sign in or save anything.
 - Keeps manual entry as a recovery option, not the main path.
-- Includes an optional, clearly labelled fictional Maria Santos demo.
+- Includes an optional, clearly labelled fictional Maria Santos demo path.
 - Stores at most two confirmed assessments for a simple comparison.
 
 ## Download or pull from GitHub
@@ -54,7 +54,7 @@ Open `http://127.0.0.1:4173/#/welcome`.
 9. Optionally use the simulated sign-in to demonstrate saving a session.
 10. Add one more report to unlock the two-report comparison.
 
-If scanning or uploading does not work, the user can retry, switch methods, or enter the report manually. **Explore a fictional demo** loads disclosed sample data only when selected.
+If scanning or uploading does not work, the user can retry, switch methods, or enter the report manually. **Explore a fictional demo** is a separate optional path through the same verification sequence.
 
 ## Main pages
 
@@ -96,7 +96,7 @@ If scanning or uploading does not work, the user can retry, switch methods, or e
 
 - QR decoding, OCR, account authentication, cloud saving, and backend storage are simulated or not connected.
 - Uploaded file bytes stay only in the current browser session and are not saved in local storage.
-- The sample report, including Maria Santos, is fictional and appears only through the demo option.
+- Because real extraction is not connected, QR, upload, and Explore Demo simulations return the same sanitized fictional Maria Santos report. Every path discloses this and requires the tester to verify the values.
 - The browser stores up to two confirmed assessments on the current device.
 - Metric definitions, ranges, focus rules, privacy, consent, and retention behavior require expert approval before production.
 

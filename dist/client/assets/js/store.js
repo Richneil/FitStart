@@ -9,7 +9,7 @@ const listeners=new Set();
 
 const initial=()=>({
   version:3,
-  session:{mode:"guest",signedIn:false,authMethod:null},
+  session:{mode:"guest-demo",signedIn:false,authMethod:null},
   profile:null,
   importDraft:null,
   draftAssessment:null,
@@ -42,7 +42,7 @@ export const store={
   confirmAssessment(assessment){store.update(d=>{const confirmed={...assessment,verified:true,id:assessment.editingAssessmentId||`assessment-${Date.now()}`};delete confirmed.editingAssessmentId;delete confirmed.previewUrl;const index=d.assessments.findIndex(item=>item.id===confirmed.id);if(index>=0)d.assessments[index]=confirmed;else d.assessments=[...d.assessments,confirmed].slice(-2);d.draftAssessment=null;d.importDraft=null;d.latestResult=null;return d})},
   generateResult(){store.update(d=>{const assessment=d.assessments.at(-1);const ranking=rankFocusAreas(assessment,d.profile);d.latestResult={assessmentId:assessment?.id||null,generatedAt:new Date().toISOString(),ranking};return d})},
   startSession(method="prototype-email"){store.update(d=>{d.session={mode:"saved-account",signedIn:true,authMethod:method};return d})},
-  continueAsGuest(){store.update(d=>{d.session={mode:"guest",signedIn:false,authMethod:null};return d})},
-  signOut(){store.update(d=>{d.session={mode:"guest",signedIn:false,authMethod:null};return d})},
+  continueAsGuest(){store.update(d=>{d.session={mode:"guest-demo",signedIn:false,authMethod:null};return d})},
+  signOut(){store.update(d=>{d.session={mode:"guest-demo",signedIn:false,authMethod:null};return d})},
   clear(){state=initial();corrupt=false;storage.remove();try{LEGACY_KEYS.forEach(key=>localStorage.removeItem(key))}catch(error){}listeners.forEach(fn=>fn(store.get()))}
 };

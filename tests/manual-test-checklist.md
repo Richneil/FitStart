@@ -30,8 +30,8 @@ Updated September 5, 2026 for the v3 automatic-first prototype sequence.
 - [ ] Missing QR and unreadable-report states provide clear recovery actions.
 - [ ] Invalid type and oversized-file messages explain the accepted formats and limit.
 - [ ] Manual entry is available as a fallback but is not promoted as the main path.
-- [ ] The fictional Maria Santos demo appears only after **Explore a fictional demo** is selected.
-- [ ] The demo and automatic reading are clearly disclosed as simulated.
+- [ ] QR, upload, and Explore Demo simulations return the same sanitized fictional Maria Santos report.
+- [ ] The demo and all automatic reading paths are clearly disclosed as simulated.
 - [ ] A third confirmed report requires replacing an existing one; only two remain stored.
 - [ ] Comparison stays locked until two confirmed reports exist.
 - [ ] Corrupted or unavailable browser storage fails safely without losing the current screen.

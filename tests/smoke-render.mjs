@@ -11,7 +11,7 @@ const assessments=structuredClone(sampleAssessments).map((assessment,index)=>({.
 const importDraft=simulateExtraction(createImportDraft("demo","Fictional FitMao demonstration report"),0);
 const draftAssessment={...assessmentFromExtraction(importDraft),verified:true};
 const ranking=rankFocusAreas(assessments.at(-1),profile);
-const full={version:3,session:{mode:"guest",signedIn:false,authMethod:null},profile,importDraft,draftAssessment,assessments,latestResult:{assessmentId:assessments.at(-1).id,ranking},ui:{personalizationComplete:true,lastRoute:"#/results",researchMode:true,importStep:3,dismissedNotices:[]}};
+const full={version:3,session:{mode:"guest-demo",signedIn:false,authMethod:null},profile,importDraft,draftAssessment,assessments,latestResult:{assessmentId:assessments.at(-1).id,ranking},ui:{personalizationComplete:true,lastRoute:"#/results",researchMode:true,importStep:3,dismissedNotices:[]}};
 const empty={...full,profile:null,importDraft:null,draftAssessment:null,assessments:[],latestResult:null,ui:{...full.ui,personalizationComplete:false,researchMode:false}};
 const camera={...empty,importDraft:createImportDraft("qr-scan","FitMao QR source")};
 const failed={...empty,importDraft:{...createImportDraft("image-upload","unreadable.png"),extractionStatus:"failed",errorMessage:"We could not read this report clearly."}};

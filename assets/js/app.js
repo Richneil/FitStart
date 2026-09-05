@@ -1,12 +1,12 @@
-import { store } from "./store.js?v=8";
-import { startRouter, matchRoute, go } from "./router.js?v=8";
-import { appShell, guidedShell } from "./components/navigation.js?v=8";
+import { store } from "./store.js?v=9";
+import { startRouter, matchRoute, go } from "./router.js?v=9";
+import { appShell, guidedShell } from "./components/navigation.js?v=9";
 import { modal, toast, label } from "./components/ui.js";
 import { metricDefinitions } from "./data/fitmao-metrics.js";
-import { fictionalDemoProfile } from "./data/demo-data.js?v=8";
-import { createImportDraft, validateReportFile } from "./services/report-import-service.js?v=8";
-import { simulateExtraction, assessmentFromExtraction } from "./services/extraction-service.js?v=8";
-import * as views from "./views/all-views.js?v=8";
+import { fictionalDemoProfile } from "./data/demo-data.js?v=9";
+import { createImportDraft, validateReportFile } from "./services/report-import-service.js?v=9";
+import { simulateExtraction, assessmentFromExtraction } from "./services/extraction-service.js?v=9";
+import * as views from "./views/all-views.js?v=9";
 
 const app=document.querySelector("#app");
 let processingTimer=null,importTimer=null,previewObjectUrl=null,previewZoom=1,dirty=false,corruptionShown=false;
