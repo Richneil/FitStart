@@ -4,6 +4,14 @@ FITSTART is a browser-based guide for new KSYN Fitness Alabang members. It helps
 
 FITSTART organizes and explains report information. It does not diagnose health conditions, predict risk, prescribe workouts or diets, or replace advice from a qualified fitness professional.
 
+## Latest updates — September 2026
+
+- Removed the named-member demo and fake sign-in so every tester starts with a clean local profile.
+- Simplified navigation, instructions, and fitness terms for first-time gym members.
+- Replaced the Home page's extra-options panel with Assessment History.
+- Added report-history cards and working links to reopen each assessment's interpreted results.
+- Increased saved history to the 10 newest reports while comparison continues to use the newest two.
+
 ## Get the project from GitHub
 
 For the first download:
